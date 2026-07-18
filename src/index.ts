@@ -1,5 +1,6 @@
 import * as a1lib from '@alt1/base';
-import ChatBoxReader from '@alt1/chatbox';
+const ChatBoxModule = require('@alt1/chatbox');
+const ChatBoxReader = ChatBoxModule.default || ChatBoxModule;
 
 // Declare globals loaded from data.js
 declare var shopData: any;
@@ -70,92 +71,99 @@ function init() {
 }
 
 function toggleOCR() {
-    if (!window.alt1) {
-        alert("Alt1 Toolkit is required to read the screen. Please use manual entry.");
-        return;
-    }
+    try {
+        if (!window.alt1) {
+            alert("Alt1 Toolkit is required to read the screen. Please use manual entry.");
+            return;
+        }
 
-    if (isOcrRunning) {
-        // Stop OCR
-        if (ocrInterval) clearInterval(ocrInterval);
-        isOcrRunning = false;
-        btnOcr.textContent = "Start OCR";
-        btnOcr.classList.remove('active');
-        ocrStatus.textContent = "OCR Stopped. Press Start to resume.";
-        return;
-    }
+        if (isOcrRunning) {
+            // Stop OCR
+            if (ocrInterval) clearInterval(ocrInterval);
+            isOcrRunning = false;
+            btnOcr.textContent = "Start OCR";
+            btnOcr.classList.remove('active');
+            ocrStatus.textContent = "OCR Stopped. Press Start to resume.";
+            return;
+        }
 
-    // Start OCR
-    if (!reader) {
-        reader = new ChatBoxReader();
-        // Configure reader for better detection
-        reader.readargs = {
-            colors: [
-                a1lib.mixColor(255, 255, 255), // White text (default)
-                a1lib.mixColor(127, 169, 255), // Light blue (often used for broadcasts/messages)
-                a1lib.mixColor(255, 0, 0), // Red
-                a1lib.mixColor(0, 255, 0)  // Green
-            ]
-        };
-    }
-    
-    // Find chatbox
-    reader.find();
-    if (!reader.pos) {
-        ocrStatus.textContent = "Error: Chatbox not found. Make sure it's visible, not 100% transparent, and active.";
-        return;
-    }
+        // Start OCR
+        if (!window.alt1.permissionPixel) {
+            const configUrl = new URL('./appconfig.json', document.location.href).href;
+            ocrStatus.innerHTML = `Permission denied! <a href="alt1://addapp/${configUrl}">Click here to Install App</a>`;
+            return;
+        }
 
-    isOcrRunning = true;
-    btnOcr.textContent = "Stop OCR";
-    btnOcr.classList.add('active');
-    ocrStatus.textContent = "Scanning chatbox for currency drops...";
-
-    ocrInterval = setInterval(() => {
-        if (!reader || !reader.pos) return;
-        const lines = reader.read() || [];
+        if (!reader) {
+            reader = new ChatBoxReader();
+        }
         
-        lines.forEach(line => {
-            const text = line.text.toLowerCase();
+        // Find chatbox
+        reader.find();
+        if (!reader.pos) {
+            ocrStatus.textContent = "Error: Chatbox not found. Make sure it's visible, not 100% transparent, and active.";
+            return;
+        }
+
+        isOcrRunning = true;
+        btnOcr.textContent = "Stop OCR";
+        btnOcr.classList.add('active');
+        ocrStatus.textContent = "Scanning chatbox for currency drops...";
+
+        ocrInterval = setInterval(() => {
+            if (!reader || !reader.pos) return;
+            const lines = reader.read() || [];
             
-            // Check for currency gain messages based on selected shop
-            let gained = 0;
-            
-            // Regex patterns for different currencies
-            if (selectedShop === "Slayer" && text.includes("slayer point")) {
-                const match = text.match(/(\d+)\s+slayer points?/);
-                if (match) gained = parseInt(match[1]);
-            } else if (selectedShop === "Marks of War" && text.includes("marks of war")) {
-                const match = text.match(/awarded (\d+)\s+marks of war/);
-                if (match) gained = parseInt(match[1]);
-            } else if (selectedShop === "Thaler" && text.includes("thaler")) {
-                const match = text.match(/awarded (\d+)\s+thaler/);
-                if (match) gained = parseInt(match[1]);
-            } else if (selectedShop === "Dungeoneering" && text.includes("tokens")) {
-                const match = text.match(/tokens?:\s*(\d+)/);
-                if (match) gained = parseInt(match[1]);
-            } else if (selectedShop === "Artisans' Workshop" && text.includes("respect")) {
-                const match = text.match(/(\d+)%\s+respect/);
-                // Respect is often tracked in %, might need manual adjustment depending on scale used in app
-                if (match) gained = parseInt(match[1]);
-            } else if (selectedShop === "Farmers' Market" && text.includes("beans")) {
-                const match = text.match(/(\d+)\s+beans/);
-                if (match) gained = parseInt(match[1]);
-            }
-            
-            if (gained > 0) {
-                // Flash input green and add points
-                const current = parseInt(currentCurrencyInput.value, 10) || 0;
-                currentCurrencyInput.value = (current + gained).toString();
+            lines.forEach(line => {
+                const text = line.text.toLowerCase();
                 
-                currentCurrencyInput.style.backgroundColor = 'rgba(16, 185, 129, 0.2)';
-                setTimeout(() => currentCurrencyInput.style.backgroundColor = '', 500);
+                // Check for currency gain messages based on selected shop
+                let gained = 0;
                 
-                ocrStatus.textContent = `Detected +${gained} ${selectedShop} currency!`;
-                calculate();
-            }
-        });
-    }, 600); // Polling interval
+                // Regex patterns for different currencies
+                if (selectedShop === "Slayer" && text.includes("slayer point")) {
+                    const match = text.match(/(\d+)\s+slayer points?/);
+                    if (match) gained = parseInt(match[1]);
+                } else if (selectedShop === "War's Wares" && text.includes("marks of war")) {
+                    const match = text.match(/awarded (\d+)\s+marks of war/);
+                    if (match) gained = parseInt(match[1]);
+                } else if (selectedShop === "Reaper" && text.includes("reaper point")) {
+                    const match = text.match(/(\d+)\s+reaper points?/);
+                    if (match) gained = parseInt(match[1]);
+                } else if (selectedShop === "Estate Agent" && text.includes("contract credit")) {
+                    const match = text.match(/(\d+)\s+contract credits?/);
+                    if (match) gained = parseInt(match[1]);
+                } else if (selectedShop === "Thaler" && text.includes("thaler")) {
+                    const match = text.match(/awarded (\d+)\s+thaler/);
+                    if (match) gained = parseInt(match[1]);
+                } else if (selectedShop === "Dungeoneering" && text.includes("tokens")) {
+                    const match = text.match(/tokens?:\s*(\d+)/);
+                    if (match) gained = parseInt(match[1]);
+                } else if (selectedShop === "Artisans' Workshop" && text.includes("respect")) {
+                    const match = text.match(/(\d+)%\s+respect/);
+                    if (match) gained = parseInt(match[1]);
+                } else if (selectedShop === "Farmers' Market" && text.includes("beans")) {
+                    const match = text.match(/(\d+)\s+beans/);
+                    if (match) gained = parseInt(match[1]);
+                }
+                
+                if (gained > 0) {
+                    // Flash input green and add points
+                    const current = parseInt(currentCurrencyInput.value, 10) || 0;
+                    currentCurrencyInput.value = (current + gained).toString();
+                    
+                    currentCurrencyInput.style.backgroundColor = 'rgba(16, 185, 129, 0.2)';
+                    setTimeout(() => currentCurrencyInput.style.backgroundColor = '', 500);
+                    
+                    ocrStatus.textContent = `Detected +${gained} ${selectedShop} currency!`;
+                    calculate();
+                }
+            });
+        }, 600); // Polling interval
+    } catch (err: any) {
+        ocrStatus.textContent = "Crash: " + err.message;
+        console.error(err);
+    }
 }
 
 function handleShopChange(e: Event) {

@@ -18,6 +18,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|jpeg|gif|webp)$/i,
+        type: 'javascript/auto',
         use: [
           {
             loader: '@alt1/imagedata-loader',
