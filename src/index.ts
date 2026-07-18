@@ -98,6 +98,11 @@ function toggleOCR() {
             reader = new ChatBoxReader();
         }
         
+        if (!window.alt1.rsWidth || !window.alt1.rsHeight) {
+            ocrStatus.textContent = "Error: RuneScape window not detected by Alt1! Open Alt1 Settings -> Capture -> Change Capture Method until it detects the game.";
+            return;
+        }
+        
         // Find chatbox
         try {
             reader.find();
