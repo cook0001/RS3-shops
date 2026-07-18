@@ -99,7 +99,15 @@ function toggleOCR() {
         }
         
         // Find chatbox
-        reader.find();
+        try {
+            reader.find();
+        } catch (e: any) {
+            if (e.message && e.message.includes("capturehold")) {
+                ocrStatus.textContent = "Error: Cannot capture RuneScape screen. Ensure the game is open and not minimized.";
+                return;
+            }
+            throw e;
+        }
         if (!reader.pos) {
             ocrStatus.textContent = "Error: Chatbox not found. Make sure it's visible, not 100% transparent, and active.";
             return;
