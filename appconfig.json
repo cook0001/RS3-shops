@@ -3,7 +3,7 @@
   "description": "Track in-game currency shops and calculate tasks needed to buy items.",
   "version": "1.0.0",
   "appUrl": "index.html",
-  "icon": "icon.png",
+  "icon": "icon_v2.png",
   "configUrl": "index.html",
   "width": 520,
   "height": 600,
