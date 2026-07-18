@@ -12,10 +12,14 @@ A sleek, automated RuneScape 3 Shop Tracker built specifically for the **Alt1 To
 ## How to use in Alt1
 Because this app runs entirely as a front-end client, you can use it instantly inside the Alt1 Toolkit!
 
-1. Open your **Alt1 Toolkit**.
-2. Click the **Browser** icon.
-3. Paste in your hosted GitHub Pages URL (e.g. `https://cook0001.github.io/RS3-shops/`).
-4. Select your desired shop and item.
+1. Open this URL in a normal browser: 
+   ```text
+   https://cook0001.github.io/RS3-shops/
+   ```
+2. If you have Alt1 Toolkit installed, Alt1 will automatically detect the app configuration. 
+3. Alternatively, you can click this direct installation link to prompt Alt1 to install it:
+   [Click here to Install App](alt1://addapp/https://cook0001.github.io/RS3-shops/config.json)
+4. Once added, select your desired shop and item.
 5. Click **Start OCR** and make sure your chatbox is visible on-screen!
 
 ## Local Development
@@ -23,7 +27,7 @@ Because this app runs entirely as a front-end client, you can use it instantly i
 If you want to modify the application, the UI logic is written in TypeScript and bundled via Webpack.
 
 ### Prerequisites
-- Node.js installed on your machine.
+- Node.js version 24 or higher installed on your machine.
 
 ### Setup
 1. Clone the repository.
