@@ -1,0 +1,15 @@
+{
+  "name": "RS3 Currency Shop Tracker",
+  "description": "Track in-game currency shops and calculate tasks needed to buy items.",
+  "version": "1.0.0",
+  "appUrl": "index.html",
+  "icon": "icon.png",
+  "configUrl": "index.html",
+  "width": 520,
+  "height": 600,
+  "minwidth": 400,
+  "minheight": 400,
+  "permissions": [
+    "pixel"
+  ]
+}

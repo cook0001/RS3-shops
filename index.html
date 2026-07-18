@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RS3 Currency Shop Tracker</title>
+    <!-- Alt1 Toolkit library -->
+    <script type="text/javascript" src="https://runeapps.org/alt1/scripts/alt1.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container glass">
+        <header>
+            <h1>Currency Tracker</h1>
+            <p class="subtitle">Calculate tasks remaining</p>
+        </header>
+
+        <main>
+            <div class="control-group">
+                <label for="shop-select">Select Shop</label>
+                <div class="custom-select">
+                    <select id="shop-select">
+                        <option value="" disabled selected>Choose a shop...</option>
+                        <!-- Options injected by JS -->
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="item-select">Target Item</label>
+                <div class="custom-select">
+                    <select id="item-select" disabled>
+                        <option value="" disabled selected>Select a shop first</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="item-quantity">Target Quantity</label>
+                <input type="number" id="item-quantity" class="currency-input" min="1" value="1" style="width: 100%;">
+            </div>
+
+            <div class="control-group">
+                <label for="rate-select" id="rate-label">Task Type</label>
+                <div class="custom-select">
+                    <select id="rate-select" disabled>
+                        <option value="" disabled selected>Select a shop first</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group toggle-group" id="burial-container" style="display: none;">
+                <div class="toggle-info">
+                    <label for="burial-checkbox">Forge as Burial Armour</label>
+                    <span class="toggle-desc">Destroys the item for massive XP</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="burial-checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+
+            <div class="control-group toggle-group" id="hardmode-container" style="display: none; flex-direction: column; align-items: stretch; gap: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                    <div class="toggle-info">
+                        <label for="hardmode-checkbox">Hard Mode / Enrage</label>
+                        <span class="toggle-desc">Increases Marks of War for certain bosses</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="hardmode-checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div id="enrage-input-container" style="display: none;">
+                    <label for="enrage-input" style="font-size: 0.85rem; color: #a1a1aa; margin-bottom: 5px; display: block;">Enrage %</label>
+                    <input type="number" id="enrage-input" class="currency-input" min="0" placeholder="0" style="width: 100%;">
+                </div>
+            </div>
+
+            <div class="status-card glass-card">
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="item-cost">Item Cost</label>
+                        <input type="number" id="item-cost" min="0" placeholder="0" readonly>
+                    </div>
+                    <div class="input-group">
+                        <label for="current-currency">Current Amount</label>
+                        <input type="number" id="current-currency" min="0" placeholder="Enter amount">
+                    </div>
+                </div>
+                <div class="ocr-section">
+                    <button id="btn-ocr" class="btn-primary">
+                        <span class="icon">🔍</span> Read Screen (OCR)
+                    </button>
+                    <small id="ocr-status" class="status-text">Alt1 not detected</small>
+                </div>
+            </div>
+
+            <div class="results-container glass-card highlight">
+                <h2>Tasks Remaining</h2>
+                <div class="result-value">
+                    <span id="tasks-needed">0</span>
+                    <span id="task-label" class="task-label">Tasks</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <p id="remaining-currency-text" class="sub-result">0 currency needed</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="dist/bundle.js"></script>
+</body>
+</html>

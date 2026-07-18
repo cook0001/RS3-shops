@@ -1,0 +1,457 @@
+
+
+=== Slayer_points ===
+Source | Level | Quantity | Rarity | League region
+Raptor's chest of slaying | N/A | 375 | Always | N/A
+Slayer Master | Points per task | Points per 10th task | Points per 50th task | Notes
+Turael or Spria | 0 | 0 | 0 | These Slayer masters will never award Slayer points and assignments will not contribute to completion streak. Cancelling a task to receive an easier one will reset the player's current completion streak to 0; However, completion streak will remain the same after accepting and completing a new task from these masters, as long as the previous task was completed and not cancelled.
+Jacquelyn | 1 | 5 | 15 | Jacquelyn's tasks are easy, but also contribute to completion streak.
+Vannaka | 2 | 10 | 30 | Vannaka's tasks are easy and fast, and can be used to complete the first four tasks and quickly begin earning points.
+The Raptor | ?–21 | ?–105(Multiples of 5) | ?–315(Multiples of 15) | The amount of Slayer points received from the Raptor's assignments depends on your Slayer level and the number of Slayer Trophies mounted. Each mounted trophy (up to a maximum of 3), as well as reaching level 113 (the halfway mark) and then level 120, increases the points received per task by one, up to 21 points at level 120 with all 3 trophies mounted.
+Mazchna or Achtryn | 4 | 20 | 60 | Mazchna or Achtryn gives more experience per task than Vannaka.
+Chaeldar | 10 | 50 | 150 | Chaeldar provides better experience and more Slayer points than Vannaka, despite taking longer to complete, as it can accumulate to more experience and points over a period of time. She is the highest level Slayer master to not have a Slayer level requirement.
+Sumona | 12 | 60 | 180 | Sumona's tasks are very similar to Duradel's, though usually in lower quantities of monsters set. Sumona is best used by players who lack the combat and/or Slayer level to use Duradel. At high levels she can assign corrupted creatures, making her more profitable than using Jacquelyn as a buffer between 10th and 50th tasks.
+Duradel or Lapalok | 15 | 75(80 after Elite Karamja achievements) | 225 | These masters are recommended for point-earning tasks, due to the comparatively high number of points received upon completing their tasks.
+Kuradal | 18 | 90 | 270 | Like Duradel or Lapalok, she is recommended for point-earning tasks, due to the comparatively high number of points received upon completing them. She requires 75 Slayer to use and should be used if the player cannot access Morvran or Laniakea.
+Morvran | 20 | 100 | 300 | Like his predecessors listed above, he is recommended for point-earning tasks, due to the high number of points received from them. You should always use Morvran for point-earning tasks with 85 Slayer and completion of Plague's End unless you've unlocked Laniakea or want to risk wealth in the Wilderness.
+Laniakea | 22 | 110 | 330 | Laniakea can assign "cluster tasks", which are groups of similar monsters designed to give the player freedom in which kind of monster they kill. A dragon cluster task, for example, allows the player to kill any kind of dragon instead of the regularly assigned black dragon etc. tasks.
+Mandrith | 22 | 110 | 330 | He is also recommended for quick point-earning tasks, due to the high number of points received and the possibility of small and quick tasks. However, all of his tasks have to be done in the Wilderness. Therefore, caution is advised. Additionally, he awards a wilderness slayer chest on completion of each task. A single reaper point is also rewarded if the task is completed without dying or skipping.
+Slayer Master | Additional Slayer points awarded
+Turael or Spria | 0
+Jacquelyn | 5
+Vannaka | 14
+The Raptor | 20[note 1]
+Mazchna or Achtryn | 3
+Chaeldar | 25
+Sumona | 30
+Duradel or Lapalok | 35
+Kuradal | 0[note 2]
+Morvran | 45
+Mandrith | 35
+Laniakea | 45
+Item | Numberin stock | Pricesold at | GE price | Resalevalue | In-game description
+ | Broad arrows (× 50)(1 Slayer) [s 1] | ∞ | 35 | 2,700 | 77.14/ | 50 broad arrows.
+ | Broad arrows (× 100)(5 Slayer) [s 1] | ∞ | 35 | 5,400 | 154.29/ | 100 broad arrows.
+ | Broad arrows (× 150)(15 Slayer) [s 1] | ∞ | 35 | 8,100 | 231.43/ | 150 broad arrows.
+ | Broad arrows (× 200)(25 Slayer) [s 1] | ∞ | 35 | 10,800 | 308.57/ | 200 broad arrows.
+ | Broad arrows (× 250)(35 Slayer) [s 1] | ∞ | 35 | 13,500 | 385.71/ | 250 broad arrows.
+ | Broad bolts (× 50)(1 Slayer) [s 1] | ∞ | 35 | 2,800 | 80/ | 50 broad bolts.
+ | Broad bolts (× 100)(5 Slayer) [s 1] | ∞ | 35 | 5,600 | 160/ | 100 broad bolts.
+ | Broad bolts (× 150)(15 Slayer) [s 1] | ∞ | 35 | 8,400 | 240/ | 150 broad bolts.
+ | Broad bolts (× 200)(25 Slayer) [s 1] | ∞ | 35 | 11,200 | 320/ | 200 broad bolts.
+ | Broad bolts (× 250)(35 Slayer) [s 1] | ∞ | 35 | 14,000 | 400/ | 250 broad bolts.
+ | Runes for Slayer Dart(Including Air rune × 50; and Death rune × 150)(1 Slayer) [s 1] | ∞ | 35 | 19,450 | 555.71/ | 50 death runes and 150 air runes.
+ | Runes for Slayer Dart(Including Air rune × 100; and Death rune × 300)(5 Slayer) [s 1] | ∞ | 35 | 38,900 | 1,111.43/ | 100 death runes and 300 air runes.
+ | Runes for Slayer Dart(Including Air rune × 150; and Death rune × 450)(15 Slayer) [s 1] | ∞ | 35 | 58,350 | 1,667.14/ | 150 death runes and 450 air runes.
+ | Runes for Slayer Dart(Including Air rune × 200; and Death rune × 600)(25 Slayer) [s 1] | ∞ | 35 | 77,800 | 2,222.86/ | 200 death runes and 600 air runes.
+ | Runes for Slayer Dart(Including Air rune × 250; and Death rune × 750)(35 Slayer) [s 1] | ∞ | 35 | 97,250 | 2,778.57/ | 250 death runes and 750 air runes.
+ | Ring of Slaying | ∞ | 75 | N/A | N/A | A ring which enables teleports to Slayer locations (8 charges).
+ | Full Slayer Helmet Upgrade (1)(First upgrade) | Unique | 100 | 390 | 3.9/ | Upgrade the stats of one Full Slayer Helmet (tier 1).Upgraded helmet requires 30 Defence to wear.Chosen helmet must be worn to be eligible for upgrade.
+ | Full Slayer Helmet Upgrade (1)(Re-upgrade) | ∞ | 10 | 390 | 39/ | Upgrade the stats of one Full Slayer Helmet (tier 1).Upgraded helmet requires 30 Defence to wear.Chosen helmet must be worn to be eligible for upgrade.
+ | Full Slayer Helmet Upgrade (2)(First upgrade) | Unique | 400 | 390 | 0.98/ | Upgrade the stats of one Full Slayer Helmet (tier 2).Upgraded helmet requires 50 Defence to wear.Chosen helmet must be worn to be eligible for upgrade, and must have the tier 1 upgrade.
+ | Full Slayer Helmet Upgrade (2)(Re-upgrade) | ∞ | 40 | 390 | 9.75/ | Upgrade the stats of one Full Slayer Helmet (tier 2).Upgraded helmet requires 50 Defence to wear.Chosen helmet must be worn to be eligible for upgrade, and must have the tier 1 upgrade.
+ | Full Slayer Helmet Upgrade (3)(First upgrade) | Unique | 600 | 390 | 0.65/ | Upgrade the stats of one Full Slayer Helmet (tier 3).Upgraded helmet requires 70 Defence to wear.Chosen helmet must be worn to be eligible for upgrade, and must have the tier 2 upgrade.
+ | Full Slayer Helmet Upgrade (3)(Re-upgrade) | ∞ | 60 | 390 | 6.5/ | Upgrade the stats of one Full Slayer Helmet (tier 3).Upgraded helmet requires 70 Defence to wear.Chosen helmet must be worn to be eligible for upgrade, and must have the tier 2 upgrade.
+ | Full Slayer Helmet Upgrade (4)(First upgrade) | Unique | 1,000 | 390 | 0.39/ | Upgrade the effectiveness of one Full Slayer Helmet (tier 4).Upgraded helmet requires 70 Defence to wear.Chosen helmet must be worn to be eligible for upgrade, and must have the tier 3 upgrade and a corrupted gem.
+ | Full Slayer Helmet Upgrade (4)(Re-upgrade) | ∞ | 100 | 390 | 3.9/ | Upgrade the effectiveness of one Full Slayer Helmet (tier 4).Upgraded helmet requires 70 Defence to wear.Chosen helmet must be worn to be eligible for upgrade, and must have the tier 3 upgrade and a corrupted gem.
+ | Ferocious ring upgrade(for use in Morvran's dungeon)(Feature unlock) | Unique | 100 | N/A | N/A | Enable use of ferocious rings in Morvran's dungeon (with 90 Slayer).
+ | Slayer XP | ∞ | 400 | N/A | N/A | 10000 Slayer XP.[s 2]
+ | Ushabti | ∞ | 20 | N/A | N/A | A figurine that has the ability to hold the soul of a Slayer monster.
+ | Fourth Room in Sunken Pyramid(Feature unlock) | Unique | 3,000 | N/A | N/A | Access to the fourth room in the Sunken Pyramid.Available after completing the quest 'Eclipse of the Heart'.Requires 99 Slayer and access to the chambers within the Sunken Pyramid[sic]
+Item | Numberin stock | Pricesold at | In-game description | Notes
+ | Persuade Kuradal and Morvran to assign aquanites | Unique | 50 | Ask Kuradal, Morvran or Laniakea to add Aquanites to their assignment list (with 78 Slayer). | The player must have the required Slayer level, boosts will not work. Sumona and Duradel (or Lapalok) can still assign aquanites even with this toggled off.
+ | Persuade Slayer masters to assign muspah | Unique | 50 | Ask Kuradal, Morvran or Laniakea to add Muspah to their assignment list (with 76 Slayer. Requires Fate of the Gods). | The player must have the required Slayer level, boosts will not work.
+ | Persuade Slayer masters to assign nihil | Unique | 50 | Ask Kuradal, Morvran or Laniakea to add Nihil to their assignment list (with 76 Slayer. Requires Fate of the Gods). | The player must have the required Slayer level, boosts will not work.
+ | Persuade Slayer masters to assign glacors | Unique | 50 | Ask Kuradal, Morvran or Laniakea to add Glacor to their assignment list (requires Ritual of the Mahjarrat). | 
+ | Persuade Slayer masters to assign tormented demons | Unique | 50 | Ask Kuradal, Morvran or Laniakea to add Tormented Demons to their assignment list (requires While Guthix Sleeps). | 
+ | Persuade Slayer masters to assign nightmare creatures | Unique | 50 | Ask Kuradal, Morvran or Laniakea to add Nightmare creatures to their assignment list (requires Children of Mah). | 
+ | Learn how to fletch broad arrows/bolts | Unique | 300 | Learn how to fletch broad arrows (with 52 Fletching) and bolts (with 55 Fletching). | 
+ | Learn how to craft rings of slaying | Unique | 300 | Learn how to craft rings of slaying (with 75 Crafting). | The Assist System can be used.
+ | Learn how to deliver killing blows quicker | Unique | 400 | Learn how to deliver killing blows quicker (with 75 Slayer). | Monsters which require a finishing blow to kill, such as rock slugs, desert lizards, zygomites, and gargoyles will die when they reach zero life points like normal monsters, as long as the item required to kill them is in the backpack or tool belt. This ability functions with ranged and magic attacks; the player does not need to be positioned adjacent to the monster to activate the finishing blow effect.
+This ability does not work when using experimental fungicide during Chaeldar's challenge.
+The item may still be used to kill a monster slightly above zero life points as before.
+
+It is stated in-game that 75 Slayer is required for this ability, but neither purchasing it nor using it actually requires the stated level.
+ | Learn how to craft Slayer helmets | Unique | 400 | Learn how to combine the nosepeg, earmuffs, spiny helm, facemask and uncharged black mask (with 55 Crafting) | Smoking Kills is required to craft slayer helmets.
+ | Learn how to fuse rings to full Slayer helmets | Unique | 500 | Learn how to fuse Rings of Slaying and Ferocious Rings to your Full Slayer Helmet (with 60 Crafting). | Smoking Kills is required to craft fused full slayer helmets and their variants.
+Players who purchase this ability can add up to five fully charged rings of slaying (40 teleports) and up to six fully charged ferocious rings (30 teleports) to any full slayer helmet variant to gain access to their teleports. The number of rings a player can fuse to it depends on the tier of the helmet.
+
+Players can recharge the teleports by fusing more rings, or by paying 5 co-op Slayer points. The helm does not gain the ring of life property of the ferocious ring, and already has the non-teleport properties of a ring of slaying. Fused slayer helmets benefit from the ferocious ring damage boost.
+ | Learn new technique to attack ice strykewyrms | Unique | 2,000 | Learn an ancient technique to attack ice strykewyrms without a fiery item (with 93 Slayer). | This ability can replace a fire cape as a requirement to be assigned ice strykewyrms assignment. The player must have the required Slayer level, boosts will not work.
+ | Learn how to attach the bonecrusher to your tool belt | Unique | 500 | Learn how to attach the bonecrusher to your tool belt. | Requires the bonecrusher from the shops.
+ | Learn how to attach herbicide to your tool belt | Unique | 500 | Learn how to attach herbicide to your tool belt. | Requires the herbicide from the shops.
+ | Learn how to attach seedicide to your tool belt | Unique | 500 | Learn how to attach seedicide to your tool belt. | Requires the seedicide from the shops.
+ | Learn how to attach the charming imp on your tool belt | Unique | 500 | Learn how to attach the charming imp to your tool belt. | Requires the charming imp from the shops.
+ | Attach the gold accumulator on your tool belt | Unique | 500 | Learn how to attach the advanced gold accumulator to your tool belt. | Requires the advanced gold accumulator from the shops.
+ | Learn to move the souls in your personal slayer dungeon | Unique | 1,000 | Learn how to control the souls in your slayer dungeon to move them between chambers. | Allows the use of the Slayer master's Ouija board in the Sunken Pyramid.
+Item | Pricesold at | Notes
+Cancel task | 30 | Skips the player's current assignment without penalties. The next assignment will gain the player normal task progression and Slayer points. However, if a current task is cancelled by accepting a new task from Turael or Spria, task streak will reset and the player will need to complete four assignments before they can start earning points again.
+This is only worth buying if tasks are from Chaeldar, Sumona, Duradel, Kuradal, Morvran or Laniakea, unless you are near a 10th or 50th task. It would take a minimum of two tasks from Laniakea, Duradel or Kuradal and three from Chaeldar or Sumona to regain the points used in buying this service.
+Block task | 100 | Skips the player's current assignment without penalties and permanently removes the assignment from the player's task list - the player will not be assigned that monster again. There is a current maximum limit of 8 types of assignments that can be cancelled - one for every 50 quest points, up to a maximum of 400 quest points. Cancelling the removal of monsters allows the monster to be assigned again, but does not refund points spent removing the monster. Blocking a cluster task from Laniakea does not prevent the individual subset task from being rolled, for example blocking Creatures of Daemonheim can still roll Kal'gerion demon or Stalker creature tasks.
+Extend task | 30 | Extends the player's number of monsters to kill on that task by 20% (e.g., 180 Nihil would be 216 instead). While this can be used at any point during the task, the 20% is still based on the initial number of monsters. It does not provide extra slayer points, compared to boss slayer. You cannot extend a task that is the same as your previous task, if the previous task was extended.
+Prefer task | 100 | Extends the player's current assignment automatically and approximately doubles the chance for the assignment to appear as a task in the future.[1] There is a current maximum limit of 8 types of assignments that can be preferred - one for every 50 quest points, up to a maximum of 400 quest points. Cancelling a preferred task does not refund points spent preferring the monster.
+Product | Members | Using | Skills | Experience | Materials | GE price | GE volume
+ | 1 × Corrupted slayer helmet |  | Slayer Rewards | 55 | 0 | 1 ×  Mighty slayer helmet1 ×  Corrupted gem1,000 ×  Slayer points | 1 × |  | Mighty slayer helmet | 1 × |  | Corrupted gem | 1,000 × |  | Slayer points | N/A | N/A
+1 × |  | Mighty slayer helmet
+1 × |  | Corrupted gem
+1,000 × |  | Slayer points
+ | 1 × Mighty slayer helmet |  | Slayer Rewards | 55 | 0 | 1 ×  Strong slayer helmet600 ×  Slayer points | 1 × |  | Strong slayer helmet | 600 × |  | Slayer points | N/A | N/A
+1 × |  | Strong slayer helmet
+600 × |  | Slayer points
+ | 1 × Reinforced slayer helmet |  | Slayer Rewards | 55 | 0 | 1 ×  Full slayer helmet100 ×  Slayer points | 1 × |  | Full slayer helmet | 100 × |  | Slayer points | N/A | N/A
+1 × |  | Full slayer helmet
+100 × |  | Slayer points
+ | 1 × Strong slayer helmet |  | Slayer Rewards | 55 | 0 | 1 ×  Reinforced slayer helmet400 ×  Slayer points | 1 × |  | Reinforced slayer helmet | 400 × |  | Slayer points | N/A | N/A
+1 × |  | Reinforced slayer helmet
+400 × |  | Slayer points
+
+
+=== Soul_Reaper ===
+Boss | Task requirements | Required kills | XP[n 1] | Reaper points[n 2] | Effective profit[n 3]
+Normal | Extended | Normal | Extended or group | Extended and group
+ | Amascut, the Devourer[n 4][n 5] | 130  combat level
+Eclipse of the Heart | 2–3 | 4–6 | Normal:30,000 | Normal:24 | Normal:30 | Normal:36 | 3,067,697 coins to 4,601,546 coins
+Hard:45,000 | Hard:29 | Hard:36 | Hard:43 | 3,706,801 coins to 5,496,291 coins
+ | The Ambassador[n 4][n 5] | 115  combat level | 2 | 4 | 50,000 | 23 | 28 | 33 | 2,939,876 coins to 4,218,084 coins
+ | Araxxi | 115  combat level | 3–4 | 6–8 | 20,000 | 20 | 25 | 30 | 2,556,414 coins to 3,834,621 coins
+ | Arch-Glacor[n 4] | 100  combat level | 5–7 | 10–14 | Normal:15,000 | Normal:15 | Normal:18 | Normal:21 | 1,917,311 coins to 2,684,235 coins
+Hard:31,250 | Hard:20 | Hard:25 | Hard:30 | 2,556,414 coins to 3,834,621 coins
+ | The Barrows Brothers[n 6] | 75  combat level | 5–10[n 7] | 10–20 | 8,750 | 9 | 11 | 13 | 1,150,386 coins to 1,661,669 coins
+ | The Barrows: Rise of the Six[n 5] | 105  combat level | 3–4 | 6–8 | 25,000 | 20 | 25 | 30 | 2,556,414 coins to 3,834,621 coins
+ | Black stone dragon[n 4][n 5] | 115 !
+115  combat level | 2 | 4 | 50,000 | 23 | 28 | 33 | 2,939,876 coins to 4,218,084 coins
+ | Chaos Elemental | 60  combat level | 4–5 | 8–10 | 12,500 | 7 | 8 | 9 | 894,745 coins to 1,150,386 coins
+ | Commander Zilyana[n 4] | 80  combat level
+70  Agility
+Access to the God Wars Dungeon | 8–12 | 16–24 | Normal:15,000 | Normal:12 | Normal:15 | Normal:18 | 1,533,849 coins to 2,300,773 coins
+Hard:18,750 | Hard:16 | Hard:20 | Hard:24 | 2,045,131 coins to 3,067,697 coins
+ | Corporeal Beast | 90  combat level
+Summer's End | 5–8 | 10–16 | 15,000 | 15 | 18 | 21 | 1,917,311 coins to 2,684,235 coins
+ | Croesus | None | 2–4 | 4–8 | 12,500 | 8 | 10 | 12 | 1,022,566 coins to 1,533,849 coins
+ | Dagannoth Kings[n 8] | 90  combat level | 8–12 | 16–24 | 12,500 | 15 | 18 | 21 | 1,917,311 coins to 2,684,235 coins
+ | Flesh-hatcher Mhekarnahz | 60  combat level | 4–7 | 8–14 | 12,500 | 8 | 10 | 12 | 1,022,566 coins to 1,533,849 coins
+ | The Gate of Elidinis | 75  combat level
+Ode of the Devourer | 3–5 | 6–10 | 12,500 | 10 | 12 | 14 | 1,278,207 coins to 1,789,490 coins
+ | General Graardor[n 4] | 80  combat level
+70  Strength
+Access to the God Wars Dungeon | 8–12 | 16–24 | Normal:15,000 | Normal:12 | Normal:15 | Normal:18 | 1,533,849 coins to 2,300,773 coins
+Hard:18,750 | Hard:16 | Hard:20 | Hard:24 | 2,045,131 coins to 3,067,697 coins
+ | Giant mole[n 4] | 60  combat level | 3–6 | 6–12 | Normal:8,750 | Normal:7 | Normal:8 | Normal:9 | 894,745 coins to 1,150,386 coins
+Hard:12,500 | Hard:10 | Hard:12 | Hard:14 | 1,278,207 coins to 1,789,490 coins
+ | Gregorovic[n 4] | 110  combat level
+80  Prayer | 5–10 | 10–20 | Normal:21,250 | Normal:18 | Normal:22 | Normal:26 | 2,300,773 coins to 3,323,339 coins
+Hard:27,500 | Hard:24 | Hard:30 | Hard:36 | 3,067,697 coins to 4,601,546 coins
+ | Har-Aken[n 9] | 100  combat level
+The Elder Kiln
+Sacrificed a fire cape to TokHaar-Hok | 1 | 2 | 18,750 | 15 | 18 | 21 | 1,917,311 coins to 2,684,235 coins
+ | Helwyr[n 4] | 110  combat level
+80  Magic | 5–10 | 10–20 | Normal:21,250 | Normal:18 | Normal:22 | Normal:26 | 2,300,773 coins to 3,323,339 coins
+Hard:27,500 | Hard:24 | Hard:30 | Hard:36 | 3,067,697 coins to 4,601,546 coins
+ | Hermod, the Spirit of War | 90  combat level
+The Spirit of War | 6–10 | 12–20 | 18,125 | 15 | 18 | 21 | 1,917,311 coins to 2,684,235 coins
+ | Ivar, King of Bones | 50  combat level [source needed]
+Partial completion of Visions of Havenhythe | 3-8 | 8-14 | 4,000 | 4 | 5 | 6 | 511,283 coins to 766,924 coins
+ | Kalphite King[n 5] | 105  combat level | 7–10 | 14–20 | 18,750 | 18 | 22 | 26 | 2,300,773 coins to 3,323,339 coins
+ | Kalphite Queen[n 10] | 80  combat level | 4–6 | 8–12 | 18,750 | 10 | 12 | 14 | 1,278,207 coins to 1,789,490 coins
+ | Kerapac, the bound[n 4] | 120  combat level | 4–8 | 8–16 | Normal:27,500 | Normal:21 | Normal:26 | Normal:31 | 2,684,235 coins to 3,962,442 coins
+Hard:40,000 | Hard:28 | Hard:35 | Hard:42 | 3,578,980 coins to 5,368,470 coins
+ | King Black Dragon | 65  combat level | 4–6 | 8–12 | 8,750 | 8 | 10 | 12 | 1,022,566 coins to 1,533,849 coins
+ | Kree'arra[n 4] | 80  combat level
+70  Ranged
+Access to the God Wars Dungeon | 8–12 | 16–24 | Normal:15,000 | Normal:12 | Normal:15 | Normal:18 | 1,533,849 coins to 2,300,773 coins
+Hard:18,750 | Hard:16 | Hard:20 | Hard:24 | 2,045,131 coins to 3,067,697 coins
+ | K'ril Tsutsaroth[n 4] | 80  combat level
+70  Constitution
+Access to the God Wars Dungeon | 8–12 | 16–24 | Normal:15,000 | Normal:12 | Normal:15 | Normal:18 | 1,533,849 coins to 2,300,773 coins
+Hard:18,750 | Hard:16 | Hard:20 | Hard:24 | 2,045,131 coins to 3,067,697 coins
+ | Legiones | 100  combat level
+95  Slayer
+Ascension Keystone per kill | 10–15 | 20–30 | 18,750 | 15 | 18 | 21 | 1,917,311 coins to 2,684,235 coins
+ | The Magister | 100  combat level
+115  Slayer
+Partial completion of Icthlarin's Little Helper (access to the Sophanem Slayer Dungeon)
+Key to the Crossing per kill | 3–7 | 6–14 | 22,500 | 15 | 18 | 21 | 1,917,311 coins to 2,684,235 coins
+ | Nakatra, Devourer Eternal[n 4][n 5] | 120  combat level
+Soul Searching | 2 | 4 | Normal:25,000 | Normal:21 | Normal:26 | Normal:31 | 2,684,235 coins to 3,962,442 coins
+Hard:37,500 | Hard:28 | Hard:35 | Hard:42 | 3,578,980 coins to 5,368,470 coins
+ | Nex[n 5][n 11] | 110  combat level
+70  Agility
+70  Constitution
+70  Strength
+70  Ranged
+Access to the God Wars Dungeon | 5–7 | 10–14 | 21,250 | 18 | 22 | 26 | 2,300,773 coins to 3,323,339 coins
+ | Nex, Angel of Death[n 5][n 11] | 125  combat level
+70  Agility
+70  Constitution
+70  Strength
+70  Ranged
+Access to the God Wars Dungeon | 3–6 | 6–12 | 37,500 | 25 | 31 | 37 | 3,195,518 coins to 4,729,366 coins
+ | Queen Black Dragon | 90  combat level
+60  Summoning | 4–6 | 8–12 | 12,500 | 15 | 18 | 21 | 1,917,311 coins to 2,684,235 coins
+ | Raksha, the Shadow Colossus | 120  combat level
+Raksha, the Shadow Colossus (quest)
+Access to Anachronia | 3–4 | 6–8 | 27,500 | 22 | 27 | 32 | 2,812,056 coins to 4,090,263 coins
+ | Rasial, the First Necromancer | 120  combat level
+Alpha vs Omega | 4–6 | 8–12 | 27,500 | 21 | 26 | 31 | 2,684,235 coins to 3,962,442 coins
+ | Rex Matriarchs | 105  combat level
+Access to Anachronia | 6–10 | 12–20 | 21,250 | 18 | 22 | 26 | 2,300,773 coins to 3,323,339 coins
+ | Seiryu the Azure Serpent[n 5] | 115  combat level
+Impressing the Locals | 2 | 4 | 50,000 | 23 | 28 | 33 | 2,939,876 coins to 4,218,084 coins
+ | Silverquill, the Dreadhog | 50  combat level [source needed]
+Hearts of Sanguine | 3-8 | 8-14 | 5,000 | 5 | 6 | 7 | 639,104 coins to 894,745 coins
+ | Solak, Guardian of the Grove[n 5] | 125  combat level | 2–4 | 4–8 | 40,000 | 27 | 33 | 39 | 3,451,159 coins to 4,985,008 coins
+ | Telos, the Warden | 120  combat level
+80  Attack
+80  Magic
+80  Prayer
+80  Ranged | 3–4 | 6–8 | 28,750 | 23 | 28 | 33 | 2,939,876 coins to 4,218,084 coins
+ | The Twin Furies[n 4] | 110  combat level
+80  Ranged | 5–10 | 10–20 | Normal:21,250 | Normal:18 | Normal:22 | Normal:26 | 2,300,773 coins to 3,323,339 coins
+Hard:27,500 | Hard:24 | Hard:30 | Hard:36 | 3,067,697 coins to 4,601,546 coins
+ | TzKal-Zuk[n 4] | 120  combat level | 1–2 | 2–4 | Normal:27,500 | Normal:21 | Normal:26 | Normal:31 | 2,684,235 coins to 3,962,442 coins
+Hard:40,000 | Hard:28 | Hard:35 | Hard:42 | 3,578,980 coins to 5,368,470 coins
+ | TzTok-Jad[n 12] | 85  combat level | 1 | 2 | 12,500 | 12 | 15 | 18 | 1,533,849 coins to 2,300,773 coins
+ | Vindicta & Gorvek[n 4] | 110  combat level
+80  Attack | 5–10 | 10–20 | Normal:21,250 | Normal:18 | Normal:22 | Normal:26 | 2,300,773 coins to 3,323,339 coins
+Hard:27,500 | Hard:24 | Hard:30 | Hard:36 | 3,067,697 coins to 4,601,546 coins
+ | Vorago[n 4][n 5] | 120  combat level | 2–3 | 4–6 | Normal:25,000 | Normal:21 | Normal:26 | Normal:31 | 2,684,235 coins to 3,962,442 coins
+Hard:31,250 | Hard:28 | Hard:35 | Hard:42 | 3,578,980 coins to 5,368,470 coins
+ | Zamorak, Lord of Chaos[n 4][n 5] | 130  combat level | 2 | 4 | Group:27,500 | Group:23 | Group:28 | Group:33 | 2,939,876 coins to 4,218,084 coins
+Solo:40,000 | Solo:27 | Solo:33 | Solo:39 | 3,451,159 coins to 4,985,008 coins
+ | Zemouregal & Vorkath[n 4] | 125  combat level
+Battle of Forinthry | 3–5 | 6–10 | Normal:27,500 | Normal:22 | Normal:27 | Normal:32 | 2,812,056 coins to 4,090,263 coins
+Hard:40,000 | Hard:28 | Hard:35 | Hard:42 | 3,578,980 coins to 5,368,470 coins
+Method | Profit per instance | Skills | Other requirements
+Completing Soul Reaper tasks | 35,747,494 | 90 , 90 , 90 , or 90  recommended
+99  recommended
+96  recommended
+95  recommended | Reaper's choice recommended
+ War's Blessing 2 recommended
+ War's Blessing 3 recommended
+ War's Blessing 4 recommended
+
+
+=== Stanley_Limelight_Traders ===
+Item | Numberin stock | Pricesold at | GE price | Resalevalue | Members | Ironmen | In-game description
+ | Granite body | ∞ | 120 | 47,590 | 396.58/ |  | Yes | Level 55 melee torso from Barbarian Assault.
+ | Fighter torso | ∞ | 150 | N/A | N/A |  | Yes | Level 40 melee torso from Barbarian Assault. Set bonus restores prayer points over time.
+ | Penance skirt | ∞ | 150 | N/A | N/A |  | Yes | Level 40 ranged legs from Barbarian Assault. Set bonus restores prayer points over time.
+ | Runner boots | ∞ | 40 | N/A | N/A |  | Yes | Level 40 ranged boots from Barbarian Assault. Set bonus restores prayer points over time.
+ | Penance gloves | ∞ | 60 | N/A | N/A |  | Yes | Lightweight level 40 melee gloves from Barbarian Assault. Set bonus restores prayer points over time.
+ | Detailed armour set | ∞ | 3,355 | N/A | N/A |  | Yes | Level 40 hybrid armour from Castle Wars. Provides a 15% damage boost in Castle Wars PvP.
+ | Profound decorative helm | ∞ | 7,475 | N/A | N/A |  | Yes | Level 80 hybrid helmet from Castle Wars. Set provides a 10-25% damage boost in Castle Wars PvP and immunity to siege weapons.
+ | Profound decorative platebody | ∞ | 12,650 | N/A | N/A |  | Yes | Level 80 hybrid torso from Castle Wars. Set provides a 10-25% damage boost in Castle Wars PvP and immunity to siege weapons.
+ | Profound decorative platelegs | ∞ | 9,200 | N/A | N/A |  | Yes | Level 80 hybrid legs from Castle Wars. Set provides a 10-25% damage boost in Castle Wars PvP and immunity to siege weapons.
+ | Profound decorative shield | ∞ | 9,200 | N/A | N/A |  | Yes | Level 80 hybrid shield from Castle Wars. Set provides a 10-25% damage boost in Castle Wars PvP and immunity to siege weapons.
+ | Profound decorative sword | ∞ | 9,200 | N/A | N/A |  | Yes | Level 80 one-handed sword from Castle Wars. Set provides a 10-25% damage boost in Castle Wars PvP and immunity to siege weapons.
+ | Void knight melee helm | ∞ | 240 | N/A | N/A |  | Yes | Level 42 melee helmet from Pest Control/Conquest. Set provides +3% accuracy and +5% damage. Requires 22 Prayer.
+ | Void knight ranger helm | ∞ | 240 | N/A | N/A |  | Yes | Level 42 ranged helmet from Pest Control/Conquest. Set provides +3% accuracy and +5% damage. Requires 22 Prayer.
+ | Void knight mage helm | ∞ | 240 | N/A | N/A |  | Yes | Level 42 magic helmet from Pest Control/Conquest. Set provides +3% accuracy and +5% damage. Requires 22 Prayer.
+ | Void knight top | ∞ | 300 | N/A | N/A |  | Yes | Level 42 hybrid torso from Pest Control/Conquest. Set provides +3% accuracy and +5% damage. Requires 22 Prayer.
+ | Void knight robes | ∞ | 300 | N/A | N/A |  | Yes | Level 42 hybrid legs from Pest Control/Conquest. Set provides +3% accuracy and +5% damage. Requires 22 Prayer.
+ | Void knight gloves | ∞ | 175 | N/A | N/A |  | Yes | Level 42 hybrid gloves from Pest Control/Conquest. Set provides +3% accuracy and +5% damage. Requires 22 Prayer.
+ | Void knight deflector | ∞ | 175 | N/A | N/A |  | Yes | Level 42 hybrid shield from Pest Control/Conquest. Set provides +3% accuracy and +5% damage. Requires 22 Prayer.
+ | Jessika's sword [s 1] | ∞ | 400 | N/A | N/A |  | Yes | Level 75 one-handed sword from Pest Control/Conquest. Requires completion of The Void Stares Back.
+ | Sacred clay armour set | ∞ | 145 | N/A | N/A |  | No | Level 50 transmutable armour set from Stealing Creation.
+ | Seers' ring (i)(Imbuing seers' ring) | ∞ | 180 | N/A | N/A |  | Yes | +25 magic attack enchantment from Soul Wars. Requires a seers' ring to enchant.
+ | Warrior ring (i)(Imbuing warrior ring) | ∞ | 180 | N/A | N/A |  | Yes | +25 melee attack enchantment from Soul Wars. Requires a warrior ring to enchant.
+ | Archers' ring (i)(Imbuing archers' ring) | ∞ | 180 | N/A | N/A |  | Yes | +25 ranged attack enchantment from Soul Wars. Requires an archers' ring to enchant.
+ | Berserker ring (i)(Imbuing berserker ring) | ∞ | 180 | N/A | N/A |  | Yes | +17 attack and +19 armour enchantment from Soul Wars. Requires a berserker ring to enchant.
+ | Battle-mage helm | ∞ | 700 | N/A | N/A |  | Yes | Level 85 hybrid helmet, cosmetic outside minigames. Set provides a 15% damage boost in PvP.
+ | Battle-mage robe | ∞ | 700 | N/A | N/A |  | Yes | Level 85 hybrid body, cosmetic outside minigames. Set provides a 15% damage boost in PvP.
+ | Battle-mage robe legs | ∞ | 700 | N/A | N/A |  | Yes | Level 85 hybrid legs, cosmetic outside minigames. Set provides a 15% damage boost in PvP.
+ | Battle-mage boots | ∞ | 700 | N/A | N/A |  | Yes | Level 85 hybrid boots, cosmetic outside minigames. Set provides a 15% damage boost in PvP.
+ | Battle-mage gloves | ∞ | 700 | N/A | N/A |  | Yes | Level 85 hybrid gloves, cosmetic outside minigames. Set provides a 15% damage boost in PvP.
+ | Trickster helm | ∞ | 700 | N/A | N/A |  | Yes | Level 85 hybrid helmet, cosmetic outside minigames. Set provides a 15% damage boost in PvP.
+ | Trickster robe | ∞ | 700 | N/A | N/A |  | Yes | Level 85 hybrid body, cosmetic outside minigames. Set provides a 15% damage boost in PvP.
+ | Trickster robe legs | ∞ | 700 | N/A | N/A |  | Yes | Level 85 hybrid legs, cosmetic outside minigames. Set provides a 15% damage boost in PvP.
+ | Trickster boots | ∞ | 700 | N/A | N/A |  | Yes | Level 85 hybrid boots, cosmetic outside minigames. Set provides a 15% damage boost in PvP.
+ | Trickster gloves | ∞ | 700 | N/A | N/A |  | Yes | Level 85 hybrid gloves, cosmetic outside minigames. Set provides a 15% damage boost in PvP.
+ | Vanguard helm | ∞ | 700 | N/A | N/A |  | Yes | Level 85 hybrid helmet, cosmetic outside minigames. Set provides a 15% damage boost in PvP.
+ | Vanguard body | ∞ | 700 | N/A | N/A |  | Yes | Level 85 hybrid body, cosmetic outside minigames. Set provides a 15% damage boost in PvP.
+ | Vanguard legs | ∞ | 700 | N/A | N/A |  | Yes | Level 85 hybrid legs, cosmetic outside minigames. Set provides a 15% damage boost in PvP.
+ | Vanguard boots | ∞ | 700 | N/A | N/A |  | Yes | Level 85 hybrid boots, cosmetic outside minigames. Set provides a 15% damage boost in PvP.
+ | Vanguard gloves | ∞ | 700 | N/A | N/A |  | Yes | Level 85 hybrid gloves, cosmetic outside minigames. Set provides a 15% damage boost in PvP.
+ | Serjeant cap | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. Serjeant's cap.
+ | Serjeant top | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. Serjeant's top.
+ | Serjeant trousers | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. Serjeant's trousers.
+ | Serjeant skirt | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. Serjeant's skirt.
+ | Serjeant boots | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. Serjeant's boots.
+ | Serjeant gloves | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. Serjeant's gloves.
+ | Commander cap | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. Commander's cap.
+ | Commander top | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. Commander's top.
+ | Commander trousers | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. Commander's trousers.
+ | Commander skirt | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. Commander's skirt.
+ | Commander boots | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. Commander's boots.
+ | Commander gloves | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. Commander's gloves.
+ | War-chief cap | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. War-chief's cap.
+ | War-chief top | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. War-chief's top.
+ | War-chief trousers | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. War-chief's trousers.
+ | War-chief skirt | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. War-chief's skirt.
+ | War-chief boots | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. War-chief's boots.
+ | War-chief gloves | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. War-chief's gloves.
+ | Lord marshal cap | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. Lord Marshal's cap.
+ | Lord marshal top | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. Lord Marshal's top.
+ | Lord marshal trousers | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. Lord Marshal's trousers.
+ | Lord marshal skirt | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. Lord Marshal's skirt.
+ | Lord marshal boots | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. Lord Marshal's boots.
+ | Lord marshal gloves | ∞ | 30 | N/A | N/A |  | Yes | A.R.M.S. Lord Marshal's gloves.
+Item | Numberin stock | Pricesold at | Members | Ironmen | In-game description
+ | Spinner charm | ∞ | 4 |  | Yes | Charms from Pest Control which can be used to summon Void familiars.
+ | Ravager charm | ∞ | 4 |  | Yes | Charms from Pest Control which can be used to summon Void familiars.
+ | Torcher charm | ∞ | 4 |  | Yes | Charms from Pest Control which can be used to summon Void familiars.
+ | Shifter charm | ∞ | 4 |  | Yes | Charms from Pest Control which can be used to summon Void familiars.
+ | Irit gloves | ∞ | 80 |  | No | Level 50 Herblore gloves from Fist of Guthix which increase the chance a dropped herb will be Irit for 100 drops.
+ | Avantoe gloves | ∞ | 80 |  | No | Level 60 Herblore gloves from Fist of Guthix which increase the chance a dropped herb will be Avantoe for 100 drops.
+ | Kwuarm gloves | ∞ | 100 |  | No | Level 70 Herblore gloves from Fist of Guthix which increase the chance a dropped herb will be Kwuarm for 100 drops.
+ | Cadantine gloves | ∞ | 100 |  | No | Level 80 Herblore gloves from Fist of Guthix which increase the chance a dropped herb will be Cadantine for 100 drops.
+ | Swordfish gloves | ∞ | 80 |  | No | Level 65 Fishing gloves from Fist of Guthix which give 100xp per swordfish caught for 1,000 catches.
+ | Shark gloves | ∞ | 100 |  | No | Level 90 Fishing gloves from Fist of Guthix which give 100xp per shark caught for 1,000 catches.
+ | Dragon slayer gloves | ∞ | 100 |  | No | Level 70 Slayer gloves from Fist of Guthix which give 15% extra Slayer XP and 10% accuracy boost on dragon tasks for 1,000 kills.
+ | Air runecrafting gloves | ∞ | 80 |  | No | Level 10 Runecrafting gloves from Fist of Guthix which give double xp per air rune for 1,000 essence.
+ | Water runecrafting gloves | ∞ | 80 |  | No | Level 20 Runecrafting gloves from Fist of Guthix which give double xp per water rune for 1,000 essence.
+ | Earth runecrafting gloves | ∞ | 80 |  | No | Level 30 Runecrafting gloves from Fist of Guthix which give double xp per earth rune for 1,000 essence.
+ | Runecrafter Set Green | ∞ | 135 |  | Yes | Cosmetic robe set from Great Orb Project.
+ | Runecrafter Set Yellow | ∞ | 135 |  | Yes | Cosmetic robe set from Great Orb Project.
+ | Runecrafter Set Blue | ∞ | 135 |  | Yes | Cosmetic robe set from Great Orb Project.
+ | Master runecrafter hat | 1 | 500 |  | Yes | Runecrafting hat from Great Orb Project which gives a 1% xp boost. Set bonus gives an additional 1% boost.
+ | Master runecrafter robe | 1 | 500 |  | Yes | Runecrafting hat from Great Orb Project which gives a 1% xp boost. Set bonus gives an additional 1% boost.
+ | Master runecrafter skirt | 1 | 500 |  | Yes | Runecrafting hat from Great Orb Project which gives a 1% xp boost. Set bonus gives an additional 1% boost.
+ | Master runecrafter boots | 1 | 500 |  | Yes | Runecrafting hat from Great Orb Project which gives a 1% xp boost. Set bonus gives an additional 1% boost.
+ | Runecrafting staff | ∞ | 330 |  | No | Staff from Great Orb Project which can be combined with a Runecrafting talisman to make a talisman staff.
+ | Factory mask | 1 | 225 |  | Yes | Helmet from Flash Powder Factory which gives better results from searching rubble in the minigame.
+ | Factory top | 1 | 350 |  | Yes | Torso from Flash Powder Factory which gives an extra 2 minutes per round in the minigame.
+ | Factory trousers | 1 | 275 |  | Yes | Legs from Flash Powder Factory which give 3 additional catalyst per round in the minigame.
+ | Factory gloves | 1 | 175 |  | Yes | Gloves from Flash Powder Factory which improve pickpocketing success in the minigame.
+ | Factory boots | 1 | 175 |  | Yes | Boots from Flash Powder Factory which reduce failure on obstacles in the minigame.
+ | Diviner's headwear | 1 | 360 |  | No | Each piece of this outfit gives 1% extra Divination xp when worn. Set bonus gives an additional 1%.
+ | Diviner's robe | 1 | 360 |  | No | Each piece of this outfit gives 1% extra Divination xp when worn. Set bonus gives an additional 1%.
+ | Diviner's handwear | 1 | 360 |  | No | Each piece of this outfit gives 1% extra Divination xp when worn. Set bonus gives an additional 1%.
+ | Diviner's legwear | 1 | 360 |  | No | Each piece of this outfit gives 1% extra Divination xp when worn. Set bonus gives an additional 1%.
+ | Diviner's footwear | 1 | 360 |  | No | Each piece of this outfit gives 1% extra Divination xp when worn. Set bonus gives an additional 1%.
+ | Artisan's bandana | 1 | 360 |  | Yes | Each piece of this outfit gives 1% extra Crafting xp when worn. Set bonus gives an additional 1%.
+ | Artisan's top | 1 | 360 |  | Yes | Each piece of this outfit gives 1% extra Crafting xp when worn. Set bonus gives an additional 1%.
+ | Artisan's legs | 1 | 360 |  | Yes | Each piece of this outfit gives 1% extra Crafting xp when worn. Set bonus gives an additional 1%.
+ | Artisan's gloves | 1 | 360 |  | Yes | Each piece of this outfit gives 1% extra Crafting xp when worn. Set bonus gives an additional 1%.
+ | Artisan's boots | 1 | 360 |  | Yes | Each piece of this outfit gives 1% extra Crafting xp when worn. Set bonus gives an additional 1%.
+ | Artisan's bandana add-on | 1 | 360 |  | Yes | This can be used with the artisan's bandana to create a modified artisan's bandana.
+ | Fletcher's headwear | 1 | 360 |  | Yes | Each piece of this outfit gives 1% extra Fletching xp when worn. Set bonus gives an additional 1%.
+ | Fletcher's chestpiece | 1 | 360 |  | Yes | Each piece of this outfit gives 1% extra Fletching xp when worn. Set bonus gives an additional 1%.
+ | Fletcher's legwear | 1 | 360 |  | Yes | Each piece of this outfit gives 1% extra Fletching xp when worn. Set bonus gives an additional 1%.
+ | Fletcher's gloves | 1 | 360 |  | Yes | Each piece of this outfit gives 1% extra Fletching xp when worn. Set bonus gives an additional 1%.
+ | Fletcher's boots | 1 | 360 |  | Yes | Each piece of this outfit gives 1% extra Fletching xp when worn. Set bonus gives an additional 1%.
+ | The Stuff | ∞ | 2 |  | No | Consumable item from Trouble Brewing which allows brewing of Mature drinks.
+ | Spirit gem bag | ∞ | 360 |  | Yes | A spirit gem bag that can store 60 of each unactivated spirit gem.
+ | Seedicide | ∞ | 360 |  | Yes | Pocket slot item from Cabbage Facepunch Bonanza which can destroy dropped seeds for Farming xp.
+ | Slayer VIP ticket | ∞ | 5 |  | Yes | Consumable item from Cabbage Facepunch Bonanza which allows a choice of two assignments from Slayer masters.
+ | Patch bomb | ∞ | 5 |  | Yes | Consumable item from Cabbage Facepunch Bonanza which instantly checks, harvests and clears a Farming patch.
+Item | Numberin stock | Pricesold at | GE price | Resalevalue | Members | Ironmen | In-game description
+ | Blue egg | ∞ | 20 | N/A | N/A |  | No | Unlock from Barbarian Assault which allows recolouring of Abyssal Whips and Dark Bows.
+ | Yellow egg | ∞ | 20 | N/A | N/A |  | No | Unlock from Barbarian Assault which allows recolouring of Abyssal Whips and Dark Bows.
+ | White egg | ∞ | 20 | N/A | N/A |  | No | Unlock from Barbarian Assault which allows recolouring of Abyssal Whips and Dark Bows.
+ | Green egg | ∞ | 20 | N/A | N/A |  | No | Unlock from Barbarian Assault which allows recolouring of Abyssal Whips and Dark Bows.
+ | Creeping hand(Using crawling hand) | 1 | 60 | N/A | N/A |  | Yes | Unlock from Soul Wars which turns a monster hand into a follower pet. Requires an appropriate monster part.
+ | Minitrice(Using cockatrice head) | 1 | 300 | N/A | N/A |  | Yes | Unlock from Soul Wars which turns a monster hand into a follower pet. Requires an appropriate monster part.
+ | Baby basilisk(Using basilisk head) | 1 | 480 | N/A | N/A |  | Yes | Unlock from Soul Wars which turns a monster hand into a follower pet. Requires an appropriate monster part.
+ | Baby kurask(Using kurask head) | 1 | 840 | N/A | N/A |  | Yes | Unlock from Soul Wars which turns a monster hand into a follower pet. Requires an appropriate monster part.
+ | Abyssal minion(Using abyssal demon head) | 1 | 1,020 | N/A | N/A |  | Yes | Unlock from Soul Wars which turns a monster hand into a follower pet. Requires an appropriate monster part.
+ | TzRek-Jad(Using fire cape) | 1 | 1,200 | N/A | N/A |  | Yes | Follower pet unlock from Soul Wars. Requires a fire cape and 99 in Slayer and Summoning.
+ | Magic notepaper (x100) | ∞ | 500 | 66,600 | 133.2/ |  | No | Use an object on this item to turn it into a stackable banknote.
+ | Silverhawk boots | 1 | 750 | N/A | N/A |  | No | Yes, they're here, and you can buy them for Thaler!
+ | Silverhawk down (x10) | ∞ | 35 | N/A | N/A |  | No | This fluffy down is used to charge the Silverhawk boots. Cannot be traded.
+ | Sealed clue scroll (medium) | ∞ | 15 | N/A | N/A |  | Yes | Clue scrolls will lead you on a treasure hunt for a set of common and rare rewards.
+ | Sealed clue scroll (hard) | ∞ | 45 | N/A | N/A |  | Yes | Clue scrolls will lead you on a treasure hunt for a set of common and rare rewards.
+ | Sealed clue scroll (elite) | ∞ | 200 | N/A | N/A |  | Yes | Clue scrolls will lead you on a treasure hunt for a set of common and rare rewards.
+ | Prismatic large fallen star | ∞ | 150 | N/A | N/A |  | No | Consume this for bonus experience in the skill of your choice.
+ | Random large fallen star | ∞ | 125 | N/A | N/A |  | No | Consume this for bonus experience in a randomly chosen skill.
+ | Junior cadet title | 1 | 100 | N/A | N/A |  | Yes | The A.R.M.S. title of Junior Cadet
+ | Serjeant title | 1 | 100 | N/A | N/A |  | Yes | The A.R.M.S. title of Serjeant
+ | Commander title | 1 | 100 | N/A | N/A |  | Yes | The A.R.M.S. title of Commander
+ | War-chief title | 1 | 100 | N/A | N/A |  | Yes | The A.R.M.S. title of War-chief
+Item | Pricesold at | In-game description
+ | Blood ethereal head | 960 | This outfit gives you bonus experience and other benefits in the Runespan.
+ | Blood ethereal body | 960 | This outfit gives you bonus experience and other benefits in the Runespan.
+ | Blood ethereal hands | 960 | This outfit gives you bonus experience and other benefits in the Runespan.
+ | Blood ethereal legs | 960 | This outfit gives you bonus experience and other benefits in the Runespan.
+ | Blood ethereal feet | 960 | This outfit gives you bonus experience and other benefits in the Runespan.
+ | Death ethereal head | 960 | This outfit gives you bonus experience and other benefits in the Runespan.
+ | Death ethereal body | 960 | This outfit gives you bonus experience and other benefits in the Runespan.
+ | Death ethereal hands | 960 | This outfit gives you bonus experience and other benefits in the Runespan.
+ | Death ethereal legs | 960 | This outfit gives you bonus experience and other benefits in the Runespan.
+ | Death ethereal feet | 960 | This outfit gives you bonus experience and other benefits in the Runespan.
+ | Law ethereal head | 960 | This outfit gives you bonus experience and other benefits in the Runespan.
+ | Law ethereal body | 960 | This outfit gives you bonus experience and other benefits in the Runespan.
+ | Law ethereal hands | 960 | This outfit gives you bonus experience and other benefits in the Runespan.
+ | Law ethereal legs | 960 | This outfit gives you bonus experience and other benefits in the Runespan.
+ | Law ethereal feet | 960 | This outfit gives you bonus experience and other benefits in the Runespan.
+Item | Pricesold at | In-game description
+ | Sapphire golem head | 960 | This outfit gives you bonus experience and other benefits in the Living Rock Caverns.
+ | Sapphire golem torso | 960 | This outfit gives you bonus experience and other benefits in the Living Rock Caverns.
+ | Sapphire golem gloves | 960 | This outfit gives you bonus experience and other benefits in the Living Rock Caverns.
+ | Sapphire golem legs | 960 | This outfit gives you bonus experience and other benefits in the Living Rock Caverns.
+ | Sapphire golem boots | 960 | This outfit gives you bonus experience and other benefits in the Living Rock Caverns.
+ | Emerald golem head | 960 | This outfit gives you bonus experience and other benefits in the Living Rock Caverns.
+ | Emerald golem torso | 960 | This outfit gives you bonus experience and other benefits in the Living Rock Caverns.
+ | Emerald golem gloves | 960 | This outfit gives you bonus experience and other benefits in the Living Rock Caverns.
+ | Emerald golem legs | 960 | This outfit gives you bonus experience and other benefits in the Living Rock Caverns.
+ | Emerald golem boots | 960 | This outfit gives you bonus experience and other benefits in the Living Rock Caverns.
+ | Ruby golem head | 960 | This outfit gives you bonus experience and other benefits in the Living Rock Caverns.
+ | Ruby golem torso | 960 | This outfit gives you bonus experience and other benefits in the Living Rock Caverns.
+ | Ruby golem gloves | 960 | This outfit gives you bonus experience and other benefits in the Living Rock Caverns.
+ | Ruby golem legs | 960 | This outfit gives you bonus experience and other benefits in the Living Rock Caverns.
+ | Ruby golem boots | 960 | This outfit gives you bonus experience and other benefits in the Living Rock Caverns.
+Item | Pricesold at | In-game description
+ | Shaman's headdress | 360 | Each piece of this outfit gives 1% extra Summoning xp when worn. Set bonus gives an additional 1%.
+ | Shaman's poncho | 360 | Each piece of this outfit gives 1% extra Summoning xp when worn. Set bonus gives an additional 1%.
+ | Shaman's hand wraps | 360 | Each piece of this outfit gives 1% extra Summoning xp when worn. Set bonus gives an additional 1%.
+ | Shaman's leggings | 360 | Each piece of this outfit gives 1% extra Summoning xp when worn. Set bonus gives an additional 1%.
+ | Shaman's moccasins | 360 | Each piece of this outfit gives 1% extra Summoning xp when worn. Set bonus gives an additional 1%.
+ | Farmer's hat | 360 | Each piece of this outfit gives 1% extra Farming xp when worn. Set bonus gives an additional 1%.
+ | Farmer's jacket | 360 | Each piece of this outfit gives 1% extra Farming xp when worn. Set bonus gives an additional 1%.
+ | Farmer's cuffs | 360 | Each piece of this outfit gives 1% extra Farming xp when worn. Set bonus gives an additional 1%.
+ | Farmer's legwear | 360 | Each piece of this outfit gives 1% extra Farming xp when worn. Set bonus gives an additional 1%.
+ | Farmer's boots | 360 | Each piece of this outfit gives 1% extra Farming xp when worn. Set bonus gives an additional 1%.
+Item | Pricesold at | In-game description
+ | Diviner's headwear | 360 | Each piece of this outfit gives 1% extra Divination xp when worn. Set bonus gives an additional 1%.
+ | Diviner's robe | 360 | Each piece of this outfit gives 1% extra Divination xp when worn. Set bonus gives an additional 1%.
+ | Diviner's legwear | 360 | Each piece of this outfit gives 1% extra Divination xp when worn. Set bonus gives an additional 1%.
+ | Diviner's handwear | 360 | Each piece of this outfit gives 1% extra Divination xp when worn. Set bonus gives an additional 1%.
+ | Diviner's footwear | 360 | Each piece of this outfit gives 1% extra Divination xp when worn. Set bonus gives an additional 1%.
+ | Sous chef's toque | 360 | Each piece of this outfit gives 1% extra Cooking xp when worn. Set bonus gives an additional 1%.
+ | Sous chef's jacket | 360 | Each piece of this outfit gives 1% extra Cooking xp when worn. Set bonus gives an additional 1%.
+ | Sous chef's mitts | 360 | Each piece of this outfit gives 1% extra Cooking xp when worn. Set bonus gives an additional 1%.
+ | Sous chef's trousers | 360 | Each piece of this outfit gives 1% extra Cooking xp when worn. Set bonus gives an additional 1%.
+ | Sous chef's shoes | 360 | Each piece of this outfit gives 1% extra Cooking xp when worn. Set bonus gives an additional 1%.
+ | First age tiara | 360 | Each piece of this outfit gives 1% extra Prayer xp when worn. Set bonus gives an additional 1%.
+ | First age ring | 360 | Each piece of this outfit gives 1% extra Prayer xp when worn. Set bonus gives an additional 1%.
+ | First age cape | 360 | Each piece of this outfit gives 1% extra Prayer xp when worn. Set bonus gives an additional 1%.
+ | First age bracelet | 360 | Each piece of this outfit gives 1% extra Prayer xp when worn. Set bonus gives an additional 1%.
+ | First age amulet | 360 | Each piece of this outfit gives 1% extra Prayer xp when worn. Set bonus gives an additional 1%.
+Item | Pricesold at | In-game description
+ | Artisan's bandana | 360 | Each piece of this outfit gives 1% extra Crafting xp when worn. Set bonus gives an additional 1%.
+ | Artisan's top | 360 | Each piece of this outfit gives 1% extra Crafting xp when worn. Set bonus gives an additional 1%.
+ | Artisan's gloves | 360 | Each piece of this outfit gives 1% extra Crafting xp when worn. Set bonus gives an additional 1%.
+ | Artisan's legs | 360 | Each piece of this outfit gives 1% extra Crafting xp when worn. Set bonus gives an additional 1%.
+ | Artisan's boots | 360 | Each piece of this outfit gives 1% extra Crafting xp when worn. Set bonus gives an additional 1%.
+ | Blacksmith's helmet | 360 | Each piece of this outfit gives 1% extra Smithing xp when worn. Set bonus gives an additional 1%.
+ | Blacksmith's top | 360 | Each piece of this outfit gives 1% extra Smithing xp when worn. Set bonus gives an additional 1%.
+ | Blacksmith's gloves | 360 | Each piece of this outfit gives 1% extra Smithing xp when worn. Set bonus gives an additional 1%.
+ | Blacksmith's apron | 360 | Each piece of this outfit gives 1% extra Smithing xp when worn. Set bonus gives an additional 1%.
+ | Blacksmith's boots | 360 | Each piece of this outfit gives 1% extra Smithing xp when worn. Set bonus gives an additional 1%.
+ | Botanist's mask | 360 | Each piece of this outfit gives 1% extra Herblore xp when worn. Set bonus gives an additional 1%.
+ | Botanist's top | 360 | Each piece of this outfit gives 1% extra Herblore xp when worn. Set bonus gives an additional 1%.
+ | Botanist's gloves | 360 | Each piece of this outfit gives 1% extra Herblore xp when worn. Set bonus gives an additional 1%.
+ | Botanist's trousers | 360 | Each piece of this outfit gives 1% extra Herblore xp when worn. Set bonus gives an additional 1%.
+ | Botanist's boots | 360 | Each piece of this outfit gives 1% extra Herblore xp when worn. Set bonus gives an additional 1%.
+
+
+=== Estate_Agents_Shop ===
+Item | Pricesold at | In-game description
+ | Plank box | 50 | A box that can hold 25 of each plank.
+ | Plank box upgrade 1(Feature unlock) | 150 | Upgrade the plank box capacity to hold 50 of each plank.
+ | Plank box upgrade 2(Feature unlock) [s 1] | 300 | Upgrade the plank box capacity to hold 100 of each plank.
+ | Master constructor's hat | 250 | Worn by masters of Construction.
+ | Master constructor's jacket | 250 | Worn by masters of Construction.
+ | Master constructor's trousers | 250 | Worn by masters of Construction.
+ | Master constructor's gloves | 250 | Worn by masters of Construction.
+ | Master constructor's boots | 250 | Worn by masters of Construction.
