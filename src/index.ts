@@ -111,54 +111,63 @@ function toggleOCR() {
         ocrStatus.textContent = "Scanning chatbox for currency drops...";
 
         ocrInterval = setInterval(() => {
-            if (!reader || !reader.pos) return;
-            const lines = reader.read() || [];
-            
-            lines.forEach(line => {
-                const text = line.text.toLowerCase();
+            try {
+                if (!reader || !reader.pos) return;
+                const lines = reader.read() || [];
                 
-                // Check for currency gain messages based on selected shop
-                let gained = 0;
-                
-                // Regex patterns for different currencies
-                if (selectedShop === "Slayer" && text.includes("slayer point")) {
-                    const match = text.match(/(\d+)\s+slayer points?/);
-                    if (match) gained = parseInt(match[1]);
-                } else if (selectedShop === "War's Wares" && text.includes("marks of war")) {
-                    const match = text.match(/awarded (\d+)\s+marks of war/);
-                    if (match) gained = parseInt(match[1]);
-                } else if (selectedShop === "Reaper" && text.includes("reaper point")) {
-                    const match = text.match(/(\d+)\s+reaper points?/);
-                    if (match) gained = parseInt(match[1]);
-                } else if (selectedShop === "Estate Agent" && text.includes("contract credit")) {
-                    const match = text.match(/(\d+)\s+contract credits?/);
-                    if (match) gained = parseInt(match[1]);
-                } else if (selectedShop === "Thaler" && text.includes("thaler")) {
-                    const match = text.match(/awarded (\d+)\s+thaler/);
-                    if (match) gained = parseInt(match[1]);
-                } else if (selectedShop === "Dungeoneering" && text.includes("tokens")) {
-                    const match = text.match(/tokens?:\s*(\d+)/);
-                    if (match) gained = parseInt(match[1]);
-                } else if (selectedShop === "Artisans' Workshop" && text.includes("respect")) {
-                    const match = text.match(/(\d+)%\s+respect/);
-                    if (match) gained = parseInt(match[1]);
-                } else if (selectedShop === "Farmers' Market" && text.includes("beans")) {
-                    const match = text.match(/(\d+)\s+beans/);
-                    if (match) gained = parseInt(match[1]);
-                }
-                
-                if (gained > 0) {
-                    // Flash input green and add points
-                    const current = parseInt(currentCurrencyInput.value, 10) || 0;
-                    currentCurrencyInput.value = (current + gained).toString();
+                lines.forEach(line => {
+                    const text = line.text.toLowerCase();
                     
-                    currentCurrencyInput.style.backgroundColor = 'rgba(16, 185, 129, 0.2)';
-                    setTimeout(() => currentCurrencyInput.style.backgroundColor = '', 500);
+                    // Check for currency gain messages based on selected shop
+                    let gained = 0;
                     
-                    ocrStatus.textContent = `Detected +${gained} ${selectedShop} currency!`;
-                    calculate();
+                    // Regex patterns for different currencies
+                    if (selectedShop === "Slayer" && text.includes("slayer point")) {
+                        const match = text.match(/(\d+)\s+slayer points?/);
+                        if (match) gained = parseInt(match[1]);
+                    } else if (selectedShop === "War's Wares" && text.includes("marks of war")) {
+                        const match = text.match(/awarded (\d+)\s+marks of war/);
+                        if (match) gained = parseInt(match[1]);
+                    } else if (selectedShop === "Reaper" && text.includes("reaper point")) {
+                        const match = text.match(/(\d+)\s+reaper points?/);
+                        if (match) gained = parseInt(match[1]);
+                    } else if (selectedShop === "Estate Agent" && text.includes("contract credit")) {
+                        const match = text.match(/(\d+)\s+contract credits?/);
+                        if (match) gained = parseInt(match[1]);
+                    } else if (selectedShop === "Thaler" && text.includes("thaler")) {
+                        const match = text.match(/awarded (\d+)\s+thaler/);
+                        if (match) gained = parseInt(match[1]);
+                    } else if (selectedShop === "Dungeoneering" && text.includes("tokens")) {
+                        const match = text.match(/tokens?:\s*(\d+)/);
+                        if (match) gained = parseInt(match[1]);
+                    } else if (selectedShop === "Artisans' Workshop" && text.includes("respect")) {
+                        const match = text.match(/(\d+)%\s+respect/);
+                        if (match) gained = parseInt(match[1]);
+                    } else if (selectedShop === "Farmers' Market" && text.includes("beans")) {
+                        const match = text.match(/(\d+)\s+beans/);
+                        if (match) gained = parseInt(match[1]);
+                    }
+                    
+                    if (gained > 0) {
+                        // Flash input green and add points
+                        const current = parseInt(currentCurrencyInput.value, 10) || 0;
+                        currentCurrencyInput.value = (current + gained).toString();
+                        
+                        currentCurrencyInput.style.backgroundColor = 'rgba(16, 185, 129, 0.2)';
+                        setTimeout(() => currentCurrencyInput.style.backgroundColor = '', 500);
+                        
+                        ocrStatus.textContent = `Detected +${gained} ${selectedShop} currency!`;
+                        calculate();
+                    }
+                });
+            } catch (err: any) {
+                // Usually "capturehold failed" when game is minimized
+                if (err.message && err.message.includes("capturehold")) {
+                    ocrStatus.textContent = "Waiting for RuneScape window...";
+                } else {
+                    ocrStatus.textContent = "OCR Error: " + err.message;
                 }
-            });
+            }
         }, 600); // Polling interval
     } catch (err: any) {
         ocrStatus.textContent = "Crash: " + err.message;
