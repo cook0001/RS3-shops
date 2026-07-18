@@ -48,7 +48,7 @@ function init() {
 
     // Check Alt1 Status
     if (window.alt1) {
-        alt1.identifyAppUrl("./appconfig.json");
+        alt1.identifyAppUrl("./config.json");
         ocrStatus.textContent = "Alt1 active - Press Start OCR to read chatbox";
         ocrStatus.className = "status-text active";
         btnOcr.textContent = "Start OCR";
@@ -89,7 +89,7 @@ function toggleOCR() {
 
         // Start OCR
         if (!window.alt1.permissionPixel) {
-            const configUrl = new URL('./appconfig.json', document.location.href).href;
+            const configUrl = new URL('./config.json', document.location.href).href;
             ocrStatus.innerHTML = `Permission denied! <a href="alt1://addapp/${configUrl}">Click here to Install App</a>`;
             return;
         }
