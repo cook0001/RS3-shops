@@ -18,7 +18,7 @@ Because this app runs entirely as a front-end client, you can use it instantly i
    ```
 2. If you have Alt1 Toolkit installed, Alt1 will automatically detect the app configuration. 
 3. Alternatively, you can click this direct installation link to prompt Alt1 to install it:
-   [Click here to Install App](alt1://addapp/https://cook0001.github.io/RS3-shops/config.json)
+   [Click here to Install App](https://cook0001.github.io/RS3-shops/install.html)
 4. Once added, select your desired shop and item.
 5. Click **Start OCR** and make sure your chatbox is visible on-screen!
 
