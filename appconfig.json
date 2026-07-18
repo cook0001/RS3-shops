@@ -9,7 +9,5 @@
   "height": 600,
   "minwidth": 400,
   "minheight": 400,
-  "permissions": [
-    "pixel"
-  ]
+  "permissions": "pixel"
 }
