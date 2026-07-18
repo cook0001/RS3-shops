@@ -1,6 +1,5 @@
 {
   "name": "Rs3 Shops",
-  "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYBAMAAAASWSDLAAAAMFBMVEUTCCATEjs6JiwXG1hkTUBUYGA1LVAfMHlbNjC2eUw+Yoh/bFionXaDUjxilHTntV/pRP8uAAAACXBIWXMAAC4jAAAuIwF4pT92AAAA/0lEQVQY02NgEBQUNjY2LjY2NjRkYBQ0Ni4HASAPKGGWFrVq1arl6eVAjliIWuibc6FJriCOiGPVutf7Xi03cTdkELaQijm5+8yZ0wvbgJykKu29LleuuCxXA3FWeW/dczp6yyo1Ywbh1HXnz5z/c+bPqzAQZ4WvEu8FJQ8tNyAnZcsWB/1JDErhbkA92dEzL/R/EuCAcLbMvKTRwSgR7ibIIKgSfffmj5tX34U7CTIwaphe8P85d8674CYBBkYl04aZ82fcjgtWEmBgYDLdMXP+T6AMhON0c+bMK0GJCgxAjlgikxIQQDiOiUodHU1KEiAOg5KShu+WJiUlBmIBALT7XLnyRwEAAAAAAElFTkSuQmCC",
   "description": "Track in-game currency shops and calculate tasks needed to buy items.",
   "version": "1.0.0",
   "appUrl": "index.html",
