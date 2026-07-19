@@ -289,21 +289,13 @@ function toggleOCR() {
                     let originalY = reader.pos.mainbox.line0y;
                     let found = false;
                     
-                    // Force 12pt font to bypass the 10-character minimum requirement of Alt1's font-guesser
-                    if (!reader.font) {
-                        try {
-                            // Using standard chat 12pt font with the exact wrapper properties expected by ChatBoxReader
-                            reader.font = { 
-                                name: "12pt", 
-                                lineheight: 16, 
-                                badgey: -10, 
-                                dy: -4, 
-                                def: require("@alt1/chatbox/fonts/12pt.fontmeta.json") 
-                            };
-                        } catch (e) {
-                            console.error("Could not force font", e);
-                        }
-                    }
+                    const fontsToTry = [
+                        { name: "12pt", def: require("@alt1/chatbox/fonts/12pt.fontmeta.json"), lh: 16 },
+                        { name: "10pt", def: require("@alt1/chatbox/fonts/10pt.fontmeta.json"), lh: 14 },
+                        { name: "14pt", def: require("@alt1/chatbox/fonts/14pt.fontmeta.json"), lh: 18 },
+                        { name: "16pt", def: require("@alt1/chatbox/fonts/16pt.fontmeta.json"), lh: 20 },
+                        { name: "18pt", def: require("@alt1/chatbox/fonts/18pt.fontmeta.json"), lh: 22 }
+                    ];
                     
                     const img = a1lib.captureHoldFullRs();
                     if (img) {
@@ -362,31 +354,44 @@ function toggleOCR() {
                                 addTopColors(whiteCounts);
                                 // ---------------------------------
                             }
-                        } catch(e) {}
+                        } catch(e) {
+                            console.log("Color calibration failed", e);
+                        }
 
-                        // Search the entire height of the box to find the exact line0y alignment
+                        // BRUTE FORCE LOOP - ALL FONTS, ALL OFFSETS
                         const maxSearchUp = Math.min(reader.pos.mainbox.rect.height + 20, 300);
-                        for (let offset = -maxSearchUp; offset <= 20; offset++) {
-                            reader.pos.mainbox.line0y = originalY + offset;
-                            try {
-                                lines = reader.read(img) || [];
-                            } catch (e: any) {
-                                console.log("Brute force read error:", e);
-                                continue;
-                            }
-                            if (lines.length > 0 && lines.some(l => l.text.trim().length > 4)) {
-                                found = true;
-                                
-                                // FORCE LOG the exact lines we locked onto so we can see if it's garbage
-                                if (debugLog) {
-                                    const div = document.createElement('div');
-                                    div.style.color = "#a855f7"; // Purple debug text
-                                    div.textContent = `[LOCKED] Found ${lines.length} lines: ` + lines.map(l => l.text).join(' | ');
-                                    debugLog.appendChild(div);
+                        
+                        for (const fontData of fontsToTry) {
+                            reader.font = { 
+                                name: fontData.name, 
+                                lineheight: fontData.lh, 
+                                badgey: -10, 
+                                dy: -4, 
+                                def: fontData.def 
+                            };
+                            
+                            for (let offset = -maxSearchUp; offset <= 20; offset++) {
+                                reader.pos.mainbox.line0y = originalY + offset;
+                                try {
+                                    lines = reader.read(img) || [];
+                                } catch (e: any) {
+                                    continue;
                                 }
-                                
-                                break;
+                                if (lines.length > 0 && lines.some(l => l.text.trim().length > 4)) {
+                                    found = true;
+                                    
+                                    // FORCE LOG the exact lines we locked onto so we can see if it's garbage
+                                    if (debugLog) {
+                                        const div = document.createElement('div');
+                                        div.style.color = "#a855f7"; // Purple debug text
+                                        div.textContent = `[LOCKED ${fontData.name}] Found ${lines.length} lines: ` + lines.map(l => l.text).join(' | ');
+                                        debugLog.appendChild(div);
+                                    }
+                                    
+                                    break;
+                                }
                             }
+                            if (found) break;
                         }
                     }
                     if (!found) {
