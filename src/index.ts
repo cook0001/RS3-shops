@@ -60,7 +60,7 @@ let lastCurrencyGainTime = 0;
 let processedLines = new Set<string>();
 let processedTimestamps = new Set<string>();
 let isInitialScan = false;
-let previousTesseractLines: string[] = [];
+let tesseractHistory: string[][] = [];
 
 function levenshtein(a: string, b: string): number {
     const matrix = [];
@@ -90,47 +90,58 @@ function fuzzyMatch(a: string, b: string): boolean {
     return distance <= Math.max(2, Math.floor(Math.min(cleanA.length, cleanB.length) * 0.2));
 }
 
-function getNewRawLines(oldLines: string[], newLines: string[]): string[] {
-    if (oldLines.length === 0) return newLines;
+function getNewRawLines(history: string[][], newLines: string[]): string[] {
+    if (history.length === 0) return newLines;
     
-    // Search ALL old lines backwards to find a stable anchor
-    // We skip lines < 4 chars because Tesseract often hallucinates 1-3 char noise
-    // at the bottom of the chatbox due to the blinking text cursor.
-    for (let i = oldLines.length - 1; i >= 0; i--) {
-        const oldLine = oldLines[i];
-        if (oldLine.length < 4) continue;
+    // Search backwards through the last 5 scans. If Tesseract glitched for one frame,
+    // we can still anchor against the scan from 3 seconds ago!
+    for (let h = history.length - 1; h >= 0; h--) {
+        const oldLines = history[h];
         
-        for (let j = newLines.length - 1; j >= 0; j--) {
-            if (fuzzyMatch(newLines[j], oldLine)) {
-                // If it's a somewhat short line, verify it with the line above it
-                if (oldLine.length < 15 && i > 0 && j > 0) {
-                    // If the verification fails, skip this anchor
-                    if (!fuzzyMatch(oldLines[i-1], newLines[j-1])) continue;
+        // Search ALL old lines backwards to find a stable anchor
+        // We skip lines < 4 chars because Tesseract often hallucinates 1-3 char noise
+        // at the bottom of the chatbox due to the blinking text cursor.
+        for (let i = oldLines.length - 1; i >= 0; i--) {
+            const oldLine = oldLines[i];
+            if (oldLine.length < 4) continue;
+            
+            for (let j = newLines.length - 1; j >= 0; j--) {
+                if (fuzzyMatch(newLines[j], oldLine)) {
+                    // If it's a somewhat short line, verify it with the line above it
+                    if (oldLine.length < 15 && i > 0 && j > 0) {
+                        // If the verification fails, skip this anchor
+                        if (!fuzzyMatch(oldLines[i-1], newLines[j-1])) continue;
+                    }
+                    const linesAfterAnchorInOld = oldLines.length - 1 - i;
+                    const firstNewIndex = j + 1 + linesAfterAnchorInOld;
+                    if (firstNewIndex >= newLines.length) return [];
+                    return newLines.slice(firstNewIndex);
                 }
-                const linesAfterAnchorInOld = oldLines.length - 1 - i;
-                const firstNewIndex = j + 1 + linesAfterAnchorInOld;
-                if (firstNewIndex >= newLines.length) return [];
-                return newLines.slice(firstNewIndex);
+            }
+        }
+        
+        // Fallback: If no >= 4 char lines matched in this history frame, try again with any length
+        for (let i = oldLines.length - 1; i >= 0; i--) {
+            const oldLine = oldLines[i];
+            for (let j = newLines.length - 1; j >= 0; j--) {
+                if (fuzzyMatch(newLines[j], oldLine)) {
+                    if (i > 0 && j > 0) {
+                        if (!fuzzyMatch(oldLines[i-1], newLines[j-1])) continue;
+                    }
+                    const linesAfterAnchorInOld = oldLines.length - 1 - i;
+                    const firstNewIndex = j + 1 + linesAfterAnchorInOld;
+                    if (firstNewIndex >= newLines.length) return [];
+                    return newLines.slice(firstNewIndex);
+                }
             }
         }
     }
     
-    // Fallback: If no >= 4 char lines matched, try again with any length
-    for (let i = oldLines.length - 1; i >= 0; i--) {
-        const oldLine = oldLines[i];
-        for (let j = newLines.length - 1; j >= 0; j--) {
-            if (fuzzyMatch(newLines[j], oldLine)) {
-                if (i > 0 && j > 0) {
-                    if (!fuzzyMatch(oldLines[i-1], newLines[j-1])) continue;
-                }
-                const linesAfterAnchorInOld = oldLines.length - 1 - i;
-                const firstNewIndex = j + 1 + linesAfterAnchorInOld;
-                if (firstNewIndex >= newLines.length) return [];
-                return newLines.slice(firstNewIndex);
-            }
-        }
-    }
-    
+    // If we failed to find ANY anchor in ANY of the last 5 scans, we must assume the chatbox 
+    // was completely cleared (e.g. hopped worlds) or OCR completely failed.
+    // However, if we return newLines, we might double count if it was just a massive OCR failure.
+    // But returning [] would miss actual drops if they really did hop worlds.
+    // Returning newLines is the safest bet, as Timestamp Deduplication should catch duplicates.
     return newLines;
 }
 
@@ -444,11 +455,15 @@ function toggleOCR() {
                                 
                                 // Deduplicate lines against previous scan
                                 let newRawLines = rawLines;
-                                if (previousTesseractLines.length > 0 && rawLines.length > 0) {
-                                    newRawLines = getNewRawLines(previousTesseractLines, rawLines);
+                                if (tesseractHistory.length > 0 && rawLines.length > 0) {
+                                    newRawLines = getNewRawLines(tesseractHistory, rawLines);
                                 }
                                 
-                                previousTesseractLines = rawLines;
+                                tesseractHistory.push(rawLines);
+                                if (tesseractHistory.length > 5) {
+                                    tesseractHistory.shift();
+                                }
+                                
                                 lines = newRawLines.map((l: string) => ({ text: l }));
                             }
                         } catch (e) {
