@@ -417,11 +417,9 @@ function toggleOCR() {
                     const uniqueId = prevLineText + "|" + text;
                     prevLineText = text;
 
-                    if (processedLines.has(uniqueId) || processedLines.has(text)) return;
+                    if (processedLines.has(uniqueId)) return;
                     
                     processedLines.add(uniqueId);
-                    // Also add the raw text to prevent single-line spam, but uniqueId is the primary key
-                    processedLines.add(text); 
                     
                     if (processedLines.size > 200) {
                         // Clear the set to prevent memory leak, keep the last few
