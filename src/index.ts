@@ -60,6 +60,19 @@ let isOcrRunning = false;
 let isScanning = false;
 let lastCurrencyDrop = 0;
 let processedLines = new Set<string>();
+let prevLineText = "";
+let previousTesseractLines: string[] = [];
+
+function fuzzyMatch(a: string, b: string): boolean {
+    if (a === b) return true;
+    if (Math.abs(a.length - b.length) > 5) return false;
+    let diffs = 0;
+    const len = Math.min(a.length, b.length);
+    for (let i = 0; i < len; i++) {
+        if (a[i] !== b[i]) diffs++;
+    }
+    return diffs <= Math.max(2, Math.floor(len * 0.2));
+}
 
 // Create a hidden canvas for Tesseract processing
 const tesseractCanvas = document.createElement('canvas');
@@ -268,6 +281,7 @@ function toggleOCR() {
         btnOcr.classList.add('active');
         ocrStatus.textContent = "Scanning for chatbox...";
 
+        let hasTriedAiAutoDetect = false;
         ocrInterval = setInterval(async () => {
             if (isScanning) return;
             isScanning = true;
@@ -275,14 +289,66 @@ function toggleOCR() {
                 initReader();
                 
                 if (!reader.pos) {
-                    reader.find();
+                    reader.find(); // Fast native Alt1 auto-detect
+                    
+                    // If native fails, try AI Auto-Detect ONCE
+                    if (!reader.pos && !hasTriedAiAutoDetect && typeof Tesseract !== 'undefined') {
+                        hasTriedAiAutoDetect = true;
+                        ocrStatus.textContent = "AI Auto-Detecting chatbox (this may take 5-10s)...";
+                        const img = a1lib.captureHoldFullRs();
+                        if (img && tCtx) {
+                            try {
+                                tesseractCanvas.width = img.width;
+                                tesseractCanvas.height = img.height;
+                                const idata = img.toData(0, 0, img.width, img.height);
+                                const idataObj = new ImageData(new Uint8ClampedArray(idata.data.buffer), img.width, img.height);
+                                tCtx.putImageData(idataObj, 0, 0);
+                                
+                                const { data } = await Tesseract.recognize(tesseractCanvas, 'eng', { logger: (m: any) => {} });
+                                
+                                if (data && data.lines) {
+                                    const chatLines = data.lines.filter((l: any) => 
+                                        l.text.match(/\[\d{2}:\d{2}:\d{2}\]/) || 
+                                        l.text.toLowerCase().includes('news:') ||
+                                        l.text.toLowerCase().includes('public chat')
+                                    );
+                                    
+                                    if (chatLines.length > 0) {
+                                        let minX = 9999, minY = 9999, maxX = 0, maxY = 0;
+                                        for (const cl of chatLines) {
+                                            if (cl.bbox.x0 < minX) minX = cl.bbox.x0;
+                                            if (cl.bbox.y0 < minY) minY = cl.bbox.y0;
+                                            if (cl.bbox.x1 > maxX) maxX = cl.bbox.x1;
+                                            if (cl.bbox.y1 > maxY) maxY = cl.bbox.y1;
+                                        }
+                                        
+                                        minX = Math.max(0, minX - 15);
+                                        minY = Math.max(0, minY - 15);
+                                        maxX = Math.min(img.width, maxX + 200); 
+                                        maxY = Math.min(img.height, maxY + 25);
+                                        
+                                        reader.pos = {
+                                            mainbox: {
+                                                rect: new a1lib.Rect(minX, minY, maxX - minX, maxY - minY),
+                                                leftfound: true
+                                            }
+                                        };
+                                        ocrStatus.textContent = "AI successfully locked onto chatbox!";
+                                    }
+                                }
+                            } catch (e) {
+                                console.error("AI Auto-Detect failed", e);
+                            }
+                        }
+                    }
+
                     if (!reader.pos) {
                         ocrStatus.textContent = "Searching for Chatbox... Please ensure it is visible, or use Manual Setup.";
                         return;
-                    } else {
+                    } else if (ocrStatus.textContent !== "AI successfully locked onto chatbox!") {
                         ocrStatus.textContent = "Chatbox auto-detected! Scanning for currency drops...";
                     }
-                } else if (ocrStatus.textContent === "Scanning for chatbox...") {
+                } else if (ocrStatus.textContent === "Scanning for chatbox..." || ocrStatus.textContent === "AI successfully locked onto chatbox!") {
                     ocrStatus.textContent = "Scanning chatbox for currency drops...";
                 }
 
@@ -315,19 +381,33 @@ function toggleOCR() {
                             const { data: { text } } = await Tesseract.recognize(
                                 tesseractCanvas,
                                 'eng',
-                                { logger: (m: any) => {
-                                    if (m.status === 'recognizing text') return;
-                                    ocrStatus.textContent = `Tesseract Loading... ${Math.round(m.progress * 100)}%`;
-                                } }
+                                { logger: (m: any) => {} }
                             );
                             
-                            if (ocrStatus.textContent && ocrStatus.textContent.includes("Loading")) {
-                                ocrStatus.textContent = "Scanning chatbox for currency drops...";
-                            }
+
 
                             if (text) {
-                                const rawLines = text.split('\n').filter((l: string) => l.trim().length > 0);
-                                lines = rawLines.map((l: string) => ({ text: l }));
+                                const rawLines = text.split('\n').map((l: string) => l.toLowerCase().trim()).filter((l: string) => l.length > 0);
+                                
+                                // Deduplicate lines against previous scan
+                                let newRawLines = rawLines;
+                                if (previousTesseractLines.length > 0 && rawLines.length > 0) {
+                                    // Look for the last line of the previous scan in the current scan
+                                    const lastOld = previousTesseractLines[previousTesseractLines.length - 1];
+                                    const matchIdx = rawLines.findIndex((l: string) => fuzzyMatch(l, lastOld));
+                                    
+                                    if (matchIdx !== -1 && matchIdx < rawLines.length - 1) {
+                                        // Overlap found, only keep lines AFTER the overlap
+                                        newRawLines = rawLines.slice(matchIdx + 1);
+                                    } else if (matchIdx !== -1 && matchIdx === rawLines.length - 1) {
+                                        // Overlap found but it's the very last line, so no new lines!
+                                        newRawLines = [];
+                                    }
+                                    // If matchIdx === -1, no overlap found (scrolled too fast), we process all rawLines
+                                }
+                                
+                                previousTesseractLines = rawLines;
+                                lines = newRawLines.map((l: string) => ({ text: l }));
                             }
                         } catch (e) {
                             console.error("Tesseract failed", e);
@@ -339,8 +419,6 @@ function toggleOCR() {
                 }
                 
                 // ----------------------------------------------
-                
-                let prevLineText = "";
                 
                 lines.forEach((line, index) => {
                     const text = line.text.toLowerCase().trim();
@@ -442,7 +520,7 @@ function toggleOCR() {
             } finally {
                 isScanning = false;
             }
-        }, 2000); // Polling interval
+        }, 3500); // Polling interval
     } catch (err: any) {
         ocrStatus.textContent = "Crash: " + err.message;
         console.error(err);
