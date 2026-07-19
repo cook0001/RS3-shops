@@ -441,9 +441,18 @@ function toggleOCR() {
                     } else if (selectedShop === "Reaper" && (text.includes("reaper") && text.includes("point"))) {
                         const match = text.match(/(\d+)\s+reaper/);
                         if (match) gained = parseInt(match[1]);
-                    } else if (selectedShop === "Estate Agent" && text.includes("contract")) {
-                        const match = text.match(/(\d+)\s+contract/);
-                        if (match) gained = parseInt(match[1]);
+                    } else if (selectedShop === "Estate Agent") {
+                        if (text.includes("contract") || text.includes("credit") || text.includes("gain")) {
+                            // Extremely permissive regex to account for OCR misreading '5' as 'S' or missing spaces
+                            const match = text.match(/(\d+|[sS])\s*(contract|cantract|credit|credt)/i);
+                            if (match) {
+                                let valStr = match[1].toLowerCase().replace('s', '5');
+                                gained = parseInt(valStr);
+                            } else {
+                                ocrStatus.textContent = `Regex missed number in: ${text}`;
+                                ocrStatus.style.color = "#fbbf24";
+                            }
+                        }
                     } else if (selectedShop === "Thaler" && text.includes("thaler")) {
                         const match = text.match(/awarded\s+(\d+)/) || text.match(/(\d+)\s+thaler/);
                         if (match) gained = parseInt(match[1]);
