@@ -36,6 +36,7 @@ let reader: any = null;
 let ocrInterval: NodeJS.Timeout | null = null;
 let isOcrRunning = false;
 let lastCurrencyDrop = 0;
+let processedLines = new Set<string>();
 
 let manualStep = 0;
 let manualX1 = 0;
@@ -244,31 +245,50 @@ function toggleOCR() {
                 }
 
                 const lines = reader.read() || [];
+                const debugLog = document.getElementById('debug-log');
                 
                 lines.forEach(line => {
-                    const text = line.text.toLowerCase();
+                    const text = line.text.toLowerCase().trim();
+                    
+                    // Display all raw OCR reads in the debug log for troubleshooting
+                    if (debugLog && text.length > 2 && !processedLines.has(text)) {
+                        const div = document.createElement('div');
+                        div.textContent = `[${new Date().toLocaleTimeString()}] ${line.text}`;
+                        debugLog.appendChild(div);
+                        debugLog.scrollTop = debugLog.scrollHeight;
+                        if (debugLog.children.length > 20) debugLog.removeChild(debugLog.children[1]);
+                    }
+
+                    if (processedLines.has(text)) return;
+                    processedLines.add(text);
+                    if (processedLines.size > 100) {
+                        // Clear the set to prevent memory leak, keep the last few
+                        const arr = Array.from(processedLines).slice(-20);
+                        processedLines = new Set(arr);
+                    }
                     
                     // Check for currency gain messages based on selected shop
                     let gained = 0;
                     
                     // Regex patterns for different currencies
-                    if (selectedShop === "Slayer" && text.includes("slayer point")) {
-                        const match = text.match(/(\d+)\s+slayer points?/);
+                    // VERY permissive regexes to account for OCR spelling mistakes
+                    if (selectedShop === "Slayer" && (text.includes("slayer") && text.includes("point"))) {
+                        const match = text.match(/(\d+)\s+slayer/);
                         if (match) gained = parseInt(match[1]);
-                    } else if (selectedShop === "War's Wares" && text.includes("marks of war")) {
-                        const match = text.match(/awarded (\d+)\s+marks of war/);
+                    } else if (selectedShop === "War's Wares" && (text.includes("war") || text.includes("marks"))) {
+                        const match = text.match(/awarded\s+(\d+)/) || text.match(/(\d+)\s+marks/);
                         if (match) gained = parseInt(match[1]);
-                    } else if (selectedShop === "Reaper" && text.includes("reaper point")) {
-                        const match = text.match(/(\d+)\s+reaper points?/);
+                    } else if (selectedShop === "Reaper" && (text.includes("reaper") && text.includes("point"))) {
+                        const match = text.match(/(\d+)\s+reaper/);
                         if (match) gained = parseInt(match[1]);
-                    } else if (selectedShop === "Estate Agent" && text.includes("contract credit")) {
-                        const match = text.match(/(\d+)\s+contract credits?/);
+                    } else if (selectedShop === "Estate Agent" && text.includes("contract")) {
+                        const match = text.match(/(\d+)\s+contract/);
                         if (match) gained = parseInt(match[1]);
                     } else if (selectedShop === "Thaler" && text.includes("thaler")) {
-                        const match = text.match(/awarded (\d+)\s+thaler/);
+                        const match = text.match(/awarded\s+(\d+)/) || text.match(/(\d+)\s+thaler/);
                         if (match) gained = parseInt(match[1]);
-                    } else if (selectedShop === "Dungeoneering" && text.includes("tokens")) {
-                        const match = text.match(/tokens?:\s*(\d+)/);
+                    } else if (selectedShop === "Dungeoneering" && text.includes("token")) {
+                        const match = text.match(/tokens?:\s*(\d+)/) || text.match(/(\d+)\s+dungeoneering token/);
                         if (match) gained = parseInt(match[1]);
                     } else if (selectedShop === "Artisans' Workshop" && text.includes("respect")) {
                         const match = text.match(/(\d+)%\s+respect/);
