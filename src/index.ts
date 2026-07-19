@@ -40,7 +40,6 @@ const remainingText = document.getElementById('remaining-currency-text') as HTML
 const btnOcr = document.getElementById('btn-ocr') as HTMLButtonElement;
 const ocrStatus = document.getElementById('ocr-status') as HTMLElement;
 const debugOutput = document.getElementById('debug-log') as HTMLElement;
-const debugCanvas = document.getElementById('alt1-preview-canvas') as HTMLCanvasElement;
 const burialContainer = document.getElementById('burial-container') as HTMLElement;
 const burialCheckbox = document.getElementById('burial-checkbox') as HTMLInputElement;
 const hardmodeContainer = document.getElementById('hardmode-container') as HTMLElement;
@@ -72,6 +71,27 @@ function fuzzyMatch(a: string, b: string): boolean {
         if (a[i] !== b[i]) diffs++;
     }
     return diffs <= Math.max(2, Math.floor(len * 0.2));
+}
+
+function getNewRawLines(oldLines: string[], newLines: string[]): string[] {
+    if (oldLines.length === 0) return newLines;
+    
+    for (let i = oldLines.length - 1; i >= Math.max(0, oldLines.length - 5); i--) {
+        const oldLine = oldLines[i];
+        
+        for (let j = newLines.length - 1; j >= 0; j--) {
+            if (fuzzyMatch(newLines[j], oldLine)) {
+                if (i > 0 && j > 0) {
+                    if (!fuzzyMatch(oldLines[i-1], newLines[j-1])) continue;
+                }
+                const linesAfterAnchorInOld = oldLines.length - 1 - i;
+                const firstNewIndex = j + 1 + linesAfterAnchorInOld;
+                if (firstNewIndex >= newLines.length) return [];
+                return newLines.slice(firstNewIndex);
+            }
+        }
+    }
+    return newLines;
 }
 
 // Create a hidden canvas for Tesseract processing
@@ -368,15 +388,6 @@ function toggleOCR() {
                             const idata = img.toData(rect.x, rect.y, rect.width, rect.height);
                             const idataObj = new ImageData(new Uint8ClampedArray(idata.data.buffer), idata.width, idata.height);
                             tCtx.putImageData(idataObj, 0, 0);
-                            
-                            // Debug view
-                            const dbgCtx = debugCanvas.getContext('2d');
-                            if (dbgCtx) {
-                                debugCanvas.style.display = "block";
-                                debugCanvas.width = rect.width;
-                                debugCanvas.height = rect.height;
-                                dbgCtx.putImageData(idataObj, 0, 0);
-                            }
 
                             const { data: { text } } = await Tesseract.recognize(
                                 tesseractCanvas,
@@ -392,18 +403,7 @@ function toggleOCR() {
                                 // Deduplicate lines against previous scan
                                 let newRawLines = rawLines;
                                 if (previousTesseractLines.length > 0 && rawLines.length > 0) {
-                                    // Look for the last line of the previous scan in the current scan
-                                    const lastOld = previousTesseractLines[previousTesseractLines.length - 1];
-                                    const matchIdx = rawLines.findIndex((l: string) => fuzzyMatch(l, lastOld));
-                                    
-                                    if (matchIdx !== -1 && matchIdx < rawLines.length - 1) {
-                                        // Overlap found, only keep lines AFTER the overlap
-                                        newRawLines = rawLines.slice(matchIdx + 1);
-                                    } else if (matchIdx !== -1 && matchIdx === rawLines.length - 1) {
-                                        // Overlap found but it's the very last line, so no new lines!
-                                        newRawLines = [];
-                                    }
-                                    // If matchIdx === -1, no overlap found (scrolled too fast), we process all rawLines
+                                    newRawLines = getNewRawLines(previousTesseractLines, rawLines);
                                 }
                                 
                                 previousTesseractLines = rawLines;
@@ -463,15 +463,15 @@ function toggleOCR() {
                         const match = text.match(/(\d+)\s+reaper/);
                         if (match) gained = parseInt(match[1]);
                     } else if (selectedShop === "Estate Agent") {
-                        if (text.includes("contract") || text.includes("credit") || text.includes("gain")) {
+                        if (text.includes("contract completed")) {
+                            // If the message doesn't state the amount, grab it from their chosen plank type
+                            gained = parseInt(rateSelect.value) || 5;
+                        } else if (text.includes("contract") || text.includes("credit") || text.includes("gain")) {
                             // Extremely permissive regex to account for OCR misreading '5' as 'S' or missing spaces
                             const match = text.match(/(\d+|[sS])\s*(contract|cantract|credit|credt)/i);
                             if (match) {
                                 let valStr = match[1].toLowerCase().replace('s', '5');
                                 gained = parseInt(valStr);
-                            } else {
-                                ocrStatus.textContent = `Regex missed number in: ${text}`;
-                                ocrStatus.style.color = "#fbbf24";
                             }
                         }
                     } else if (selectedShop === "Thaler" && text.includes("thaler")) {
@@ -520,7 +520,7 @@ function toggleOCR() {
             } finally {
                 isScanning = false;
             }
-        }, 3500); // Polling interval
+        }, 1500); // Polling interval
     } catch (err: any) {
         ocrStatus.textContent = "Crash: " + err.message;
         console.error(err);
