@@ -61,6 +61,10 @@ let isScanning = false;
 let lastCurrencyDrop = 0;
 let processedLines = new Set<string>();
 
+// Create a hidden canvas for Tesseract processing
+const tesseractCanvas = document.createElement('canvas');
+const tCtx = tesseractCanvas.getContext('2d');
+
 let manualStep = 0;
 let manualX1 = 0;
 let manualY1 = 0;
@@ -112,10 +116,6 @@ function init() {
     }
 
     btnOcr.addEventListener('click', toggleOCR);
-
-    // Create a hidden canvas for Tesseract processing
-    const tesseractCanvas = document.createElement('canvas');
-    const tCtx = tesseractCanvas.getContext('2d');
 
     btnManualChatbox.addEventListener('click', () => {
         if (!window.alt1) {
