@@ -231,12 +231,8 @@ function toggleOCR() {
             try {
                 initReader();
                 
-                // Explicitly grab the exact pixel region into an ImgRef
-                const img = a1lib.captureHoldFullRs();
-                if (!img) return;
-                
                 if (!reader.pos) {
-                    reader.find(img);
+                    reader.find();
                     if (!reader.pos) {
                         ocrStatus.textContent = "Searching for Chatbox... Please ensure it is visible, or use Manual Setup.";
                         return;
@@ -247,7 +243,7 @@ function toggleOCR() {
                     ocrStatus.textContent = "Scanning chatbox for currency drops...";
                 }
 
-                const lines = reader.read(img) || [];
+                const lines = reader.read() || [];
                 
                 lines.forEach(line => {
                     const text = line.text.toLowerCase();
