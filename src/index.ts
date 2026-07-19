@@ -39,6 +39,8 @@ const progressBar = document.getElementById('progress-bar') as HTMLElement;
 const remainingText = document.getElementById('remaining-currency-text') as HTMLElement;
 const btnOcr = document.getElementById('btn-ocr') as HTMLButtonElement;
 const ocrStatus = document.getElementById('ocr-status') as HTMLElement;
+const debugOutput = document.getElementById('debug-log') as HTMLElement;
+const debugCanvas = document.getElementById('debug-canvas') as HTMLCanvasElement;
 const burialContainer = document.getElementById('burial-container') as HTMLElement;
 const burialCheckbox = document.getElementById('burial-checkbox') as HTMLInputElement;
 const hardmodeContainer = document.getElementById('hardmode-container') as HTMLElement;
@@ -305,6 +307,19 @@ function toggleOCR() {
                     
                     const img = a1lib.captureHoldFullRs();
                     if (img) {
+                        // DRAW THE CAPTURED BOX TO THE CANVAS FOR DEBUGGING!
+                        try {
+                            const dbgCtx = debugCanvas.getContext('2d');
+                            if (dbgCtx) {
+                                debugCanvas.style.display = "block";
+                                debugCanvas.width = reader.pos.mainbox.rect.width;
+                                debugCanvas.height = reader.pos.mainbox.rect.height;
+                                const idata = img.toData(reader.pos.mainbox.rect.x, reader.pos.mainbox.rect.y, reader.pos.mainbox.rect.width, reader.pos.mainbox.rect.height);
+                                const idataObj = new ImageData(new Uint8ClampedArray(idata.data.buffer), idata.width, idata.height);
+                                dbgCtx.putImageData(idataObj, 0, 0);
+                            }
+                        } catch(e) {}
+
                         // Search the entire height of the box to find the exact line0y alignment
                         const maxSearchUp = Math.min(reader.pos.mainbox.rect.height + 20, 300);
                         for (let offset = -maxSearchUp; offset <= 20; offset++) {
