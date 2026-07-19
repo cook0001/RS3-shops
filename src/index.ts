@@ -290,8 +290,14 @@ function toggleOCR() {
                     // Force 12pt font to bypass the 10-character minimum requirement of Alt1's font-guesser
                     if (!reader.font) {
                         try {
-                            // Using standard chat 12pt font
-                            reader.font = require("@alt1/chatbox/fonts/12pt.fontmeta.json");
+                            // Using standard chat 12pt font with the exact wrapper properties expected by ChatBoxReader
+                            reader.font = { 
+                                name: "12pt", 
+                                lineheight: 16, 
+                                badgey: -10, 
+                                dy: -4, 
+                                def: require("@alt1/chatbox/fonts/12pt.fontmeta.json") 
+                            };
                         } catch (e) {
                             console.error("Could not force font", e);
                         }
