@@ -259,7 +259,13 @@ function toggleOCR() {
                     if (img) {
                         for (let offset = -15; offset <= 15; offset++) {
                             reader.pos.mainbox.line0y = originalY + offset;
-                            lines = reader.read(img) || [];
+                            try {
+                                lines = reader.read(img) || [];
+                            } catch (e: any) {
+                                console.log("Brute force read error:", e);
+                                // If img bounds are bad, do NOT spam native read! Just break out.
+                                break;
+                            }
                             if (lines.length > 0) {
                                 found = true;
                                 // Found the correct alignment! Leave line0y here.
@@ -342,9 +348,11 @@ function toggleOCR() {
                 });
             } catch (err: any) {
                 // Usually "capturehold failed" when game is minimized or buffer overloaded
-                const errMsg = typeof err === 'string' ? err : (err.message || String(err));
+                const errMsg = typeof err === 'string' ? err : (err.stack || err.message || String(err));
                 if (errMsg.includes("capturehold")) {
                     ocrStatus.textContent = "Waiting for RuneScape window...";
+                } else if (errMsg.includes("RangeError")) {
+                    ocrStatus.textContent = "OCR Error: Manual box out of screen bounds. Redraw carefully!";
                 } else {
                     ocrStatus.textContent = "OCR Error: " + errMsg;
                 }
