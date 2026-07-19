@@ -41,6 +41,20 @@ let manualStep = 0;
 let manualX1 = 0;
 let manualY1 = 0;
 
+function initReader() {
+    if (!reader) {
+        reader = new ChatBoxReader();
+        reader.readargs.colors = [
+            a1lib.mixColor(255, 255, 255), // White
+            a1lib.mixColor(127, 169, 255), // Light Blue
+            a1lib.mixColor(0, 255, 0),     // Green (Drops)
+            a1lib.mixColor(255, 127, 0),   // Orange
+            a1lib.mixColor(255, 255, 0),   // Yellow
+            a1lib.mixColor(255, 0, 0)      // Red
+        ];
+    }
+}
+
 // Initialize App
 function init() {
     // Populate shop dropdown
@@ -143,9 +157,7 @@ function init() {
                 return;
             }
 
-            if (!reader) {
-                reader = new ChatBoxReader();
-            }
+            initReader();
             
             // Hardcode the position using the AFKWarden style
             reader.pos = {
@@ -153,7 +165,8 @@ function init() {
                     rect: new a1lib.Rect(x, y, w, h),
                     line0x: 0,
                     line0y: h - 15,
-                    timestamp: false
+                    timestamp: false,
+                    leftfound: true
                 },
                 boxes: []
             };
@@ -216,7 +229,7 @@ function toggleOCR() {
 
         ocrInterval = setInterval(() => {
             try {
-                if (!reader) return;
+                initReader();
                 
                 // Explicitly grab the exact pixel region into an ImgRef
                 const img = a1lib.captureHoldFullRs();
