@@ -62,15 +62,32 @@ let processedTimestamps = new Set<string>();
 let isInitialScan = false;
 let previousTesseractLines: string[] = [];
 
+function levenshtein(a: string, b: string): number {
+    const matrix = [];
+    for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+    for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+    for (let i = 1; i <= b.length; i++) {
+        for (let j = 1; j <= a.length; j++) {
+            if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                matrix[i][j] = matrix[i - 1][j - 1];
+            } else {
+                matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, Math.min(matrix[i][j - 1] + 1, matrix[i - 1][j] + 1));
+            }
+        }
+    }
+    return matrix[b.length][a.length];
+}
+
 function fuzzyMatch(a: string, b: string): boolean {
     if (a === b) return true;
-    if (Math.abs(a.length - b.length) > 5) return false;
-    let diffs = 0;
-    const len = Math.min(a.length, b.length);
-    for (let i = 0; i < len; i++) {
-        if (a[i] !== b[i]) diffs++;
-    }
-    return diffs <= Math.max(2, Math.floor(len * 0.2));
+    // Strip spaces and punctuation before comparing to ignore OCR formatting noise
+    const cleanA = a.replace(/[^a-z0-9]/gi, '');
+    const cleanB = b.replace(/[^a-z0-9]/gi, '');
+    if (cleanA === cleanB) return true;
+    if (Math.abs(cleanA.length - cleanB.length) > 5) return false;
+    
+    const distance = levenshtein(cleanA, cleanB);
+    return distance <= Math.max(2, Math.floor(Math.min(cleanA.length, cleanB.length) * 0.2));
 }
 
 function getNewRawLines(oldLines: string[], newLines: string[]): string[] {
@@ -510,9 +527,10 @@ function toggleOCR() {
                     }
                     
                     if (gained > 0) {
-                        // Extract timestamp [HH:MM:SS] if user has in-game timestamps enabled
-                        const timeMatch = text.match(/\[(\d{2}:\d{2}:\d{2})\]/);
-                        let messageTimestamp = timeMatch ? timeMatch[1] : null;
+                        // Extract timestamp [HH:MM:SS] if user has in-game timestamps enabled.
+                        // Highly permissive regex to account for Tesseract misreading brackets and digits.
+                        const timeMatch = text.match(/[\[\(\s]*([0-9loLO]{2}[:;][0-9loLO]{2}[:;][0-9loLO]{2})[\]\)\s]*/i);
+                        let messageTimestamp = timeMatch ? timeMatch[1].replace(/[loLO]/gi, '0').replace(/;/g, ':') : null;
                         
                         if (messageTimestamp) {
                             if (processedTimestamps.has(messageTimestamp)) {
