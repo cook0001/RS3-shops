@@ -199,7 +199,7 @@ function init() {
                 mainbox: {
                     rect: new a1lib.Rect(x, y, w, h),
                     line0x: 0,
-                    line0y: y + h - 15, // MUST be absolute screen coordinate!
+                    line0y: h - 15, // Must be relative to the top-left of the manual box!
                     timestamp: false,
                     leftfound: true
                 },
