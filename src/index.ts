@@ -119,7 +119,7 @@ function init() {
     }
 
     function handleManualAlt1Press() {
-        let pos = a1lib.mousePosition();
+        let pos = a1lib.getMousePosition();
         if (!pos) return;
 
         if (manualStep === 1) {
