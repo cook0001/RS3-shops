@@ -312,52 +312,28 @@ function toggleOCR() {
                                 const idataObj = new ImageData(new Uint8ClampedArray(idata.data.buffer), idata.width, idata.height);
                                 dbgCtx.putImageData(idataObj, 0, 0);
 
-                                // --- DYNAMIC COLOR CALIBRATION ---
-                                // If the user has HDR or display color profiles active, the colors are distorted.
-                                // We extract the exact pixel colors from their screen and inject them into the OCR!
-                                let greenCounts = new Map<number, number>();
-                                let blueCounts = new Map<number, number>();
-                                let whiteCounts = new Map<number, number>();
+                                // --- ROBUST COLOR PALETTE INJECTION ---
+                                // Inject all standard RS3 chat colors. Alt1 has a tolerance of ~60 for these.
+                                const rsColors = [
+                                    a1lib.mixColor(0, 255, 0),    // Pure Green (Game message)
+                                    a1lib.mixColor(0, 175, 0),    // Dark Green (Filtered/Clan)
+                                    a1lib.mixColor(127, 169, 255),// Light Blue (Timestamps)
+                                    a1lib.mixColor(255, 255, 255),// White (Standard text)
+                                    a1lib.mixColor(0, 255, 255),  // Cyan (Private message)
+                                    a1lib.mixColor(255, 128, 0),  // Orange (Drops)
+                                    a1lib.mixColor(255, 0, 0),    // Red (Boss/Warning)
+                                    a1lib.mixColor(255, 255, 0),  // Yellow (Status)
+                                    a1lib.mixColor(170, 50, 50)   // Dark Red (Important)
+                                ];
                                 
-                                for (let i = 0; i < idata.data.length; i += 4) {
-                                    let r = idata.data[i];
-                                    let g = idata.data[i+1];
-                                    let b = idata.data[i+2];
-                                    
-                                    // Green (Game message text)
-                                    if (g > 150 && r < 100 && b < 100) {
-                                        let c = a1lib.mixColor(r, g, b);
-                                        greenCounts.set(c, (greenCounts.get(c) || 0) + 1);
-                                    }
-                                    // Light Blue (Timestamp)
-                                    else if (b > 180 && g > 120 && r < 150) {
-                                        let c = a1lib.mixColor(r, g, b);
-                                        blueCounts.set(c, (blueCounts.get(c) || 0) + 1);
-                                    }
-                                    // White (Brackets / standard text)
-                                    else if (r > 200 && g > 200 && b > 200) {
-                                        let c = a1lib.mixColor(r, g, b);
-                                        whiteCounts.set(c, (whiteCounts.get(c) || 0) + 1);
+                                for (const c of rsColors) {
+                                    if (!reader.readargs.colors.includes(c)) {
+                                        reader.readargs.colors.push(c);
                                     }
                                 }
-                                
-                                const addTopColors = (map: Map<number, number>) => {
-                                    let sorted = [...map.entries()].sort((a, b) => b[1] - a[1]);
-                                    for (let i = 0; i < Math.min(5, sorted.length); i++) {
-                                        if (!reader.readargs.colors.includes(sorted[i][0])) {
-                                            reader.readargs.colors.push(sorted[i][0]);
-                                            console.log("Added dynamic color calibration:", a1lib.unmixColor(sorted[i][0]));
-                                        }
-                                    }
-                                };
-                                
-                                addTopColors(greenCounts);
-                                addTopColors(blueCounts);
-                                addTopColors(whiteCounts);
-                                // ---------------------------------
                             }
                         } catch(e) {
-                            console.log("Color calibration failed", e);
+                            console.log("Canvas debugging failed", e);
                         }
 
                         // BRUTE FORCE LOOP - ALL FONTS, ALL OFFSETS
