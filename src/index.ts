@@ -397,7 +397,9 @@ function toggleOCR() {
                 
                 const debugLog = document.getElementById('debug-log');
                 
-                lines.forEach(line => {
+                let prevLineText = "";
+                
+                lines.forEach((line, index) => {
                     const text = line.text.toLowerCase().trim();
                     
                     // Display all raw OCR reads in the debug log for troubleshooting
@@ -409,11 +411,21 @@ function toggleOCR() {
                         if (debugLog.children.length > 20) debugLog.removeChild(debugLog.children[1]);
                     }
 
-                    if (processedLines.has(text)) return;
-                    processedLines.add(text);
-                    if (processedLines.size > 100) {
+                    // For detecting duplicates, we use context from the previous line.
+                    // This is critical because RS3 often splits game messages (e.g., "[01:00] Contract Complete" followed by "You gain 5 credits").
+                    // Without the timestamp from the previous line, every "You gain 5 credits" looks identical and gets ignored.
+                    const uniqueId = prevLineText + "|" + text;
+                    prevLineText = text;
+
+                    if (processedLines.has(uniqueId) || processedLines.has(text)) return;
+                    
+                    processedLines.add(uniqueId);
+                    // Also add the raw text to prevent single-line spam, but uniqueId is the primary key
+                    processedLines.add(text); 
+                    
+                    if (processedLines.size > 200) {
                         // Clear the set to prevent memory leak, keep the last few
-                        const arr = Array.from(processedLines).slice(-20);
+                        const arr = Array.from(processedLines).slice(-50);
                         processedLines = new Set(arr);
                     }
                     
