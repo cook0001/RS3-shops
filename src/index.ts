@@ -379,7 +379,10 @@ function toggleOCR() {
                                 } catch (e: any) {
                                     continue;
                                 }
-                                if (lines.length > 0 && lines.some(l => l.text.trim().length > 4)) {
+                                if (lines.length > 0 && lines.some(l => {
+                                    const cleanText = l.text.replace(/[^a-zA-Z0-9\s]/g, '').trim();
+                                    return cleanText.length > 4 && /[a-zA-Z]{3}/.test(cleanText);
+                                })) {
                                     found = true;
                                     
                                     // FORCE LOG the exact lines we locked onto so we can see if it's garbage
