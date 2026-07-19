@@ -239,7 +239,7 @@ function toggleOCR() {
                     } else {
                         ocrStatus.textContent = "Chatbox auto-detected! Scanning for currency drops...";
                     }
-                } else if (isOcrRunning && ocrStatus.textContent.includes("Searching") || ocrStatus.textContent.includes("manually locked")) {
+                } else if (ocrStatus.textContent === "Scanning for chatbox...") {
                     ocrStatus.textContent = "Scanning chatbox for currency drops...";
                 }
 
