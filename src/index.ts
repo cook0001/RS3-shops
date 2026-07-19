@@ -376,7 +376,8 @@ function toggleOCR() {
                         rectStr = ` [x:${r.x}, y:${r.y}, w:${r.width}, h:${r.height}]`;
                     }
                     const rsSize = window.alt1 ? `${alt1.rsWidth}x${alt1.rsHeight}` : "Unknown";
-                    ocrStatus.textContent = `RangeError${rectStr}. RS: ${rsSize}.`;
+                    let stack = (err && err.stack) ? err.stack.replace(/\n/g, " | ").substring(0, 150) : "No stack";
+                    ocrStatus.textContent = `RangeError${rectStr}. RS: ${rsSize}. STACK: ${stack}`;
                 } else {
                     ocrStatus.textContent = "OCR Error: " + errMsg;
                 }
