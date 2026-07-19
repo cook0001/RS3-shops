@@ -32,9 +32,14 @@ let selectedShop: string | null = null;
 let selectedItem: string | null = null;
 
 // Alt1 OCR State
-let reader: ChatBoxReader | null = null;
+let reader: any = null;
 let ocrInterval: NodeJS.Timeout | null = null;
 let isOcrRunning = false;
+let lastCurrencyDrop = 0;
+
+let manualStep = 0;
+let manualX1 = 0;
+let manualY1 = 0;
 
 // Initialize App
 function init() {
@@ -67,7 +72,96 @@ function init() {
     hardmodeCheckbox.addEventListener('change', calculate);
     enrageInput.addEventListener('input', calculate);
     currentCurrencyInput.addEventListener('input', calculate);
+    
+    const btnManualChatbox = document.getElementById('btn-manual-chatbox') as HTMLButtonElement;
+    
+    // Set initial alt1 state
+    if (window.alt1) {
+        ocrStatus.textContent = "Alt1 detected - Ready to scan";
+        ocrStatus.style.color = "#4ade80"; // Green
+    }
+
     btnOcr.addEventListener('click', toggleOCR);
+
+    btnManualChatbox.addEventListener('click', () => {
+        if (!window.alt1) {
+            ocrStatus.textContent = "Error: Alt1 not detected. Open this in Alt1 Toolkit.";
+            return;
+        }
+
+        if (isOcrRunning) {
+            toggleOCR(); // Stop OCR first
+        }
+
+        if (manualStep === 0) {
+            manualStep = 1;
+            ocrStatus.textContent = "Hover your mouse over the TOP-LEFT corner of the chat text and press Alt+1";
+            ocrStatus.style.color = "#fbbf24"; // Yellow
+            btnManualChatbox.innerHTML = '<span class="icon">❌</span> Cancel Setup';
+            btnManualChatbox.style.background = "rgba(239, 68, 68, 0.2)";
+            btnManualChatbox.style.borderColor = "rgba(239, 68, 68, 0.4)";
+            
+            a1lib.on('alt1pressed', handleManualAlt1Press);
+        } else {
+            cancelManualSetup();
+        }
+    });
+
+    function cancelManualSetup() {
+        manualStep = 0;
+        ocrStatus.textContent = "Manual setup cancelled. Ready.";
+        ocrStatus.style.color = "#4ade80"; // Green
+        btnManualChatbox.innerHTML = '<span class="icon">🎯</span> Manual Chatbox';
+        btnManualChatbox.style.background = "rgba(255, 255, 255, 0.05)";
+        btnManualChatbox.style.borderColor = "rgba(255, 255, 255, 0.1)";
+        // In @alt1/base, removeListener is standard, but some versions use off or removeListener. Try/catch to be safe.
+        try { a1lib.removeListener('alt1pressed', handleManualAlt1Press); } catch(e) {}
+    }
+
+    function handleManualAlt1Press() {
+        let pos = a1lib.mousePosition();
+        if (!pos) return;
+
+        if (manualStep === 1) {
+            manualX1 = pos.x;
+            manualY1 = pos.y;
+            manualStep = 2;
+            ocrStatus.textContent = "Great! Now hover over the BOTTOM-RIGHT corner of the chat text and press Alt+1";
+        } else if (manualStep === 2) {
+            let x2 = pos.x;
+            let y2 = pos.y;
+
+            let x = Math.min(manualX1, x2);
+            let y = Math.min(manualY1, y2);
+            let w = Math.abs(x2 - manualX1);
+            let h = Math.abs(y2 - manualY1);
+
+            if (w < 50 || h < 20) {
+                cancelManualSetup();
+                ocrStatus.textContent = "Error: Bounding box too small. Try Manual Setup again.";
+                ocrStatus.style.color = "#ef4444";
+                return;
+            }
+
+            if (!reader) {
+                reader = new ChatBoxReader();
+            }
+            
+            // Hardcode the position using the AFKWarden style
+            reader.pos = {
+                mainbox: {
+                    rect: new a1lib.Rect(x, y, w, h),
+                    line0x: 0,
+                    line0y: h - 15,
+                    timestamp: false
+                },
+                boxes: []
+            };
+
+            cancelManualSetup();
+            ocrStatus.textContent = "Chatbox manually locked! Click 'Read Screen (OCR)' to start scanning.";
+        }
+    }
 }
 
 function toggleOCR() {
@@ -131,11 +225,13 @@ function toggleOCR() {
                 if (!reader.pos) {
                     reader.find(img);
                     if (!reader.pos) {
-                        ocrStatus.textContent = "Searching for Chatbox... Please ensure it is visible and not blocked by tooltips.";
+                        ocrStatus.textContent = "Searching for Chatbox... Please ensure it is visible, or use Manual Setup.";
                         return;
                     } else {
-                        ocrStatus.textContent = "Chatbox found! Scanning for currency drops...";
+                        ocrStatus.textContent = "Chatbox auto-detected! Scanning for currency drops...";
                     }
+                } else if (isOcrRunning && ocrStatus.textContent.includes("Searching") || ocrStatus.textContent.includes("manually locked")) {
+                    ocrStatus.textContent = "Scanning chatbox for currency drops...";
                 }
 
                 const lines = reader.read(img) || [];
