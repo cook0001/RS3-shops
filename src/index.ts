@@ -278,6 +278,8 @@ function toggleOCR() {
                     ocrStatus.textContent = "Scanning chatbox for currency drops...";
                 }
 
+                const debugLog = document.getElementById('debug-log');
+                
                 let lines = reader.read() || [];
                 
                 // --- BRUTE FORCE ALIGNMENT FOR MANUAL SETUP ---
@@ -405,8 +407,6 @@ function toggleOCR() {
                     }
                 }
                 // ----------------------------------------------
-                
-                const debugLog = document.getElementById('debug-log');
                 
                 let prevLineText = "";
                 
