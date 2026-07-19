@@ -105,7 +105,12 @@ function toggleOCR() {
         
         // Find chatbox
         try {
-            reader.find();
+            const img = a1lib.captureHoldFullRs();
+            if (!img) {
+                ocrStatus.textContent = "Error: Failed to bind image reference.";
+                return;
+            }
+            reader.find(img);
         } catch (e: any) {
             if (e.message && e.message.includes("capturehold")) {
                 ocrStatus.textContent = "Error: Cannot capture RuneScape screen. Ensure the game is open and not minimized.";
@@ -126,7 +131,12 @@ function toggleOCR() {
         ocrInterval = setInterval(() => {
             try {
                 if (!reader || !reader.pos) return;
-                const lines = reader.read() || [];
+                
+                // Explicitly grab the exact pixel region into an ImgRef
+                const img = a1lib.captureHoldFullRs();
+                if (!img) return;
+                
+                const lines = reader.read(img) || [];
                 
                 lines.forEach(line => {
                     const text = line.text.toLowerCase();
