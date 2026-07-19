@@ -165,7 +165,7 @@ function init() {
                 mainbox: {
                     rect: new a1lib.Rect(x, y, w, h),
                     line0x: 0,
-                    line0y: h - 15,
+                    line0y: y + h - 15, // MUST be absolute screen coordinate!
                     timestamp: false,
                     leftfound: true
                 },
