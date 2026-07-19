@@ -282,10 +282,20 @@ function toggleOCR() {
                 // If manual setup was used, line0y might be slightly misaligned.
                 // ChatBoxReader returns null (empty array) if it can't find a font match on line0y.
                 // We can brute force line0y up and down a few pixels to find the perfect alignment.
-                if (lines.length === 0 && reader.pos && reader.pos.mainbox.leftfound === true && !reader.font && !(reader.pos as any).bruteForced) {
+                if (lines.length === 0 && reader.pos && reader.pos.mainbox.leftfound === true && !(reader.pos as any).bruteForced) {
                     (reader.pos as any).bruteForced = true; // Only try this once per manual setup
                     let originalY = reader.pos.mainbox.line0y;
                     let found = false;
+                    
+                    // Force 12pt font to bypass the 10-character minimum requirement of Alt1's font-guesser
+                    if (!reader.font) {
+                        try {
+                            // Using standard chat 12pt font
+                            reader.font = require("@alt1/chatbox/fonts/12pt.fontmeta.json");
+                        } catch (e) {
+                            console.error("Could not force font", e);
+                        }
+                    }
                     
                     const img = a1lib.captureHoldFullRs();
                     if (img) {
