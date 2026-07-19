@@ -64,14 +64,6 @@ let manualY1 = 0;
 function initReader() {
     if (!reader) {
         reader = new ChatBoxReader();
-        reader.readargs.colors = [
-            a1lib.mixColor(255, 255, 255), // White
-            a1lib.mixColor(127, 169, 255), // Light Blue
-            a1lib.mixColor(0, 255, 0),     // Green (Drops)
-            a1lib.mixColor(255, 127, 0),   // Orange
-            a1lib.mixColor(255, 255, 0),   // Yellow
-            a1lib.mixColor(255, 0, 0)      // Red
-        ];
     }
 }
 
@@ -297,7 +289,9 @@ function toggleOCR() {
                     
                     const img = a1lib.captureHoldFullRs();
                     if (img) {
-                        for (let offset = -15; offset <= 15; offset++) {
+                        // Search the entire height of the box to find the exact line0y alignment
+                        const maxSearchUp = Math.min(reader.pos.mainbox.rect.height + 20, 300);
+                        for (let offset = -maxSearchUp; offset <= 20; offset++) {
                             reader.pos.mainbox.line0y = originalY + offset;
                             try {
                                 lines = reader.read(img) || [];
