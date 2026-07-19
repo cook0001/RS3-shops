@@ -372,13 +372,19 @@ function toggleOCR() {
                                 lines = reader.read(img) || [];
                             } catch (e: any) {
                                 console.log("Brute force read error:", e);
-                                // Don't break, just skip this offset and try the next one!
                                 continue;
                             }
-                            if (lines.length > 0) {
+                            if (lines.length > 0 && lines.some(l => l.text.trim().length > 4)) {
                                 found = true;
-                                // Found the correct alignment! Leave line0y here.
-                                console.log("Brute-forced line0y offset: " + offset);
+                                
+                                // FORCE LOG the exact lines we locked onto so we can see if it's garbage
+                                if (debugLog) {
+                                    const div = document.createElement('div');
+                                    div.style.color = "#a855f7"; // Purple debug text
+                                    div.textContent = `[LOCKED] Found ${lines.length} lines: ` + lines.map(l => l.text).join(' | ');
+                                    debugLog.appendChild(div);
+                                }
+                                
                                 break;
                             }
                         }
