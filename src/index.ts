@@ -370,7 +370,13 @@ function toggleOCR() {
                 if (errMsg.includes("capturehold")) {
                     ocrStatus.textContent = "Waiting for RuneScape window...";
                 } else if (errMsg.includes("RangeError")) {
-                    ocrStatus.textContent = "OCR Error: Manual box out of screen bounds. Redraw carefully!";
+                    let rectStr = "";
+                    if (reader && reader.pos && reader.pos.mainbox) {
+                        const r = reader.pos.mainbox.rect;
+                        rectStr = ` [x:${r.x}, y:${r.y}, w:${r.width}, h:${r.height}]`;
+                    }
+                    const rsSize = window.alt1 ? `${alt1.rsWidth}x${alt1.rsHeight}` : "Unknown";
+                    ocrStatus.textContent = `RangeError${rectStr}. RS: ${rsSize}.`;
                 } else {
                     ocrStatus.textContent = "OCR Error: " + errMsg;
                 }
