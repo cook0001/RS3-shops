@@ -145,11 +145,29 @@ function init() {
         } else if (manualStep === 2) {
             let x2 = pos.x;
             let y2 = pos.y;
-
+            
+            // Clamp to RuneScape window bounds if alt1 is available
+            if (window.alt1) {
+                x2 = Math.max(0, Math.min(x2, alt1.rsWidth - 1));
+                y2 = Math.max(0, Math.min(y2, alt1.rsHeight - 1));
+                manualX1 = Math.max(0, Math.min(manualX1, alt1.rsWidth - 1));
+                manualY1 = Math.max(0, Math.min(manualY1, alt1.rsHeight - 1));
+            }
+            
             let x = Math.min(manualX1, x2);
             let y = Math.min(manualY1, y2);
-            let w = Math.abs(x2 - manualX1);
-            let h = Math.abs(y2 - manualY1);
+            let w = Math.max(Math.abs(x2 - manualX1), 100); // Minimum 100px width
+            let h = Math.max(Math.abs(y2 - manualY1), 30);  // Minimum 30px height to fit at least 2 lines
+            
+            // Re-adjust x and y if width/height pushed them out of bounds
+            if (window.alt1) {
+                if (x + w > alt1.rsWidth) x = alt1.rsWidth - w;
+                if (y + h > alt1.rsHeight) y = alt1.rsHeight - h;
+            }
+            
+            // Ensure they don't go negative after adjustment
+            x = Math.max(0, x);
+            y = Math.max(0, y);
 
             if (w < 50 || h < 20) {
                 cancelManualSetup();
