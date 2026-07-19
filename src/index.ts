@@ -244,7 +244,32 @@ function toggleOCR() {
                     ocrStatus.textContent = "Scanning chatbox for currency drops...";
                 }
 
-                const lines = reader.read() || [];
+                let lines = reader.read() || [];
+                
+                // --- BRUTE FORCE ALIGNMENT FOR MANUAL SETUP ---
+                // If manual setup was used, line0y might be slightly misaligned.
+                // ChatBoxReader returns null (empty array) if it can't find a font match on line0y.
+                // We can brute force line0y up and down a few pixels to find the perfect alignment.
+                if (lines.length === 0 && reader.pos && reader.pos.mainbox.leftfound === true && !reader.font) {
+                    let originalY = reader.pos.mainbox.line0y;
+                    let found = false;
+                    for (let offset = -15; offset <= 15; offset++) {
+                        reader.pos.mainbox.line0y = originalY + offset;
+                        lines = reader.read() || [];
+                        if (lines.length > 0) {
+                            found = true;
+                            // Found the correct alignment! Leave line0y here.
+                            console.log("Brute-forced line0y offset: " + offset);
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        // Reset back if we couldn't find it
+                        reader.pos.mainbox.line0y = originalY;
+                    }
+                }
+                // ----------------------------------------------
+                
                 const debugLog = document.getElementById('debug-log');
                 
                 lines.forEach(line => {
