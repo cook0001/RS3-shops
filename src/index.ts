@@ -297,8 +297,8 @@ function toggleOCR() {
                                 lines = reader.read(img) || [];
                             } catch (e: any) {
                                 console.log("Brute force read error:", e);
-                                // If img bounds are bad, do NOT spam native read! Just break out.
-                                break;
+                                // Don't break, just skip this offset and try the next one!
+                                continue;
                             }
                             if (lines.length > 0) {
                                 found = true;
@@ -311,6 +311,11 @@ function toggleOCR() {
                     if (!found) {
                         // Reset back if we couldn't find it
                         reader.pos.mainbox.line0y = originalY;
+                        ocrStatus.textContent = "Manual alignment failed. Check box bounds/transparency.";
+                        ocrStatus.style.color = "#fbbf24";
+                    } else {
+                        ocrStatus.textContent = "Manual alignment successful!";
+                        ocrStatus.style.color = "#4ade80";
                     }
                 }
                 // ----------------------------------------------
