@@ -1,5 +1,5 @@
 {
-  "name": "Rs3 Shops",
+  "appName": "Rs3 Shops",
   "description": "Track in-game currency shops and calculate tasks needed to buy items.",
   "version": "1.0.0",
   "appUrl": "index.html",
