@@ -103,14 +103,10 @@ function toggleOCR() {
             return;
         }
         
-        // Find chatbox
+        // Don't fail immediately if not found. Let the interval retry!
         try {
             const img = a1lib.captureHoldFullRs();
-            if (!img) {
-                ocrStatus.textContent = "Error: Failed to bind image reference.";
-                return;
-            }
-            reader.find(img);
+            if (img) reader.find(img);
         } catch (e: any) {
             if (e.message && e.message.includes("capturehold")) {
                 ocrStatus.textContent = "Error: Cannot capture RuneScape screen. Ensure the game is open and not minimized.";
@@ -118,24 +114,30 @@ function toggleOCR() {
             }
             throw e;
         }
-        if (!reader.pos) {
-            ocrStatus.textContent = "Error: Chatbox not found. Make sure it's visible, not 100% transparent, and active.";
-            return;
-        }
 
         isOcrRunning = true;
         btnOcr.textContent = "Stop OCR";
         btnOcr.classList.add('active');
-        ocrStatus.textContent = "Scanning chatbox for currency drops...";
+        ocrStatus.textContent = "Scanning for chatbox...";
 
         ocrInterval = setInterval(() => {
             try {
-                if (!reader || !reader.pos) return;
+                if (!reader) return;
                 
                 // Explicitly grab the exact pixel region into an ImgRef
                 const img = a1lib.captureHoldFullRs();
                 if (!img) return;
                 
+                if (!reader.pos) {
+                    reader.find(img);
+                    if (!reader.pos) {
+                        ocrStatus.textContent = "Searching for Chatbox... Please ensure it is visible and not blocked by tooltips.";
+                        return;
+                    } else {
+                        ocrStatus.textContent = "Chatbox found! Scanning for currency drops...";
+                    }
+                }
+
                 const lines = reader.read(img) || [];
                 
                 lines.forEach(line => {
