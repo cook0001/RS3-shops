@@ -3,10 +3,11 @@
 A sleek, automated RuneScape 3 Shop Tracker built specifically for the **Alt1 Toolkit**. This app dynamically tracks your progress toward purchasing shop rewards and automatically updates in real-time by reading your chatbox for currency drops!
 
 ## Features
-- ⚔️ **Live OCR Integration**: Instantly reads your chatbox for currency gains (Marks of War, Slayer Points, Beans, etc.) using Alt1 and updates your remaining tasks.
-- 🎯 **All Major Shops Supported**: Slayer, Reaper, Thaler, Estate Agent, War's Wares, Farmers' Market, Dungeoneering, and Artisans' Workshop.
-- 📈 **Dynamic Enrage & Hard Mode Scaling**: Automatically scales Marks of War rewards for Telos, Zamorak, and Arch-Glacor when Enrage is toggled.
-- ⚒️ **Burial Armour Calculations**: Automatically calculates massive XP gains for Smithing tasks at the Artisans' Workshop.
+- 🤖 **Tesseract AI OCR**: Bypasses traditional pixel-matching limitations. Perfectly reads your chatbox regardless of anti-aliasing, interface scaling, or colored chat text!
+- 🎯 **AI Auto-Detect Chatbox**: No more drawing boxes manually! The app scans your game window and uses AI bounding box detection to lock onto your chatbox instantly.
+- ⏱️ **Timestamp Deduplication**: Flawlessly filters out duplicate messages by tracking exact in-game timestamps. Never miss or double-count a drop again!
+- 📊 **All Major Shops Supported**: Slayer, Reaper, Thaler, Estate Agent, War's Wares, Farmers' Market, Dungeoneering, and Artisans' Workshop.
+- 📈 **Dynamic Enrage & Hard Mode**: Automatically scales Marks of War rewards for Telos, Zamorak, and Arch-Glacor based on entered Enrage.
 - ✨ **Premium Glassmorphism UI**: Beautiful dark mode aesthetics with responsive, animated components.
 
 ## How to use in Alt1
