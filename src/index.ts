@@ -250,17 +250,22 @@ function toggleOCR() {
                 // If manual setup was used, line0y might be slightly misaligned.
                 // ChatBoxReader returns null (empty array) if it can't find a font match on line0y.
                 // We can brute force line0y up and down a few pixels to find the perfect alignment.
-                if (lines.length === 0 && reader.pos && reader.pos.mainbox.leftfound === true && !reader.font) {
+                if (lines.length === 0 && reader.pos && reader.pos.mainbox.leftfound === true && !reader.font && !(reader.pos as any).bruteForced) {
+                    (reader.pos as any).bruteForced = true; // Only try this once per manual setup
                     let originalY = reader.pos.mainbox.line0y;
                     let found = false;
-                    for (let offset = -15; offset <= 15; offset++) {
-                        reader.pos.mainbox.line0y = originalY + offset;
-                        lines = reader.read() || [];
-                        if (lines.length > 0) {
-                            found = true;
-                            // Found the correct alignment! Leave line0y here.
-                            console.log("Brute-forced line0y offset: " + offset);
-                            break;
+                    
+                    const img = a1lib.captureHoldFullRs();
+                    if (img) {
+                        for (let offset = -15; offset <= 15; offset++) {
+                            reader.pos.mainbox.line0y = originalY + offset;
+                            lines = reader.read(img) || [];
+                            if (lines.length > 0) {
+                                found = true;
+                                // Found the correct alignment! Leave line0y here.
+                                console.log("Brute-forced line0y offset: " + offset);
+                                break;
+                            }
                         }
                     }
                     if (!found) {
@@ -336,11 +341,12 @@ function toggleOCR() {
                     }
                 });
             } catch (err: any) {
-                // Usually "capturehold failed" when game is minimized
-                if (err.message && err.message.includes("capturehold")) {
+                // Usually "capturehold failed" when game is minimized or buffer overloaded
+                const errMsg = typeof err === 'string' ? err : (err.message || String(err));
+                if (errMsg.includes("capturehold")) {
                     ocrStatus.textContent = "Waiting for RuneScape window...";
                 } else {
-                    ocrStatus.textContent = "OCR Error: " + err.message;
+                    ocrStatus.textContent = "OCR Error: " + errMsg;
                 }
             }
         }, 600); // Polling interval
