@@ -317,6 +317,50 @@ function toggleOCR() {
                                 const idata = img.toData(reader.pos.mainbox.rect.x, reader.pos.mainbox.rect.y, reader.pos.mainbox.rect.width, reader.pos.mainbox.rect.height);
                                 const idataObj = new ImageData(new Uint8ClampedArray(idata.data.buffer), idata.width, idata.height);
                                 dbgCtx.putImageData(idataObj, 0, 0);
+
+                                // --- DYNAMIC COLOR CALIBRATION ---
+                                // If the user has HDR or display color profiles active, the colors are distorted.
+                                // We extract the exact pixel colors from their screen and inject them into the OCR!
+                                let greenCounts = new Map<number, number>();
+                                let blueCounts = new Map<number, number>();
+                                let whiteCounts = new Map<number, number>();
+                                
+                                for (let i = 0; i < idata.data.length; i += 4) {
+                                    let r = idata.data[i];
+                                    let g = idata.data[i+1];
+                                    let b = idata.data[i+2];
+                                    
+                                    // Green (Game message text)
+                                    if (g > 150 && r < 100 && b < 100) {
+                                        let c = a1lib.mixColor(r, g, b);
+                                        greenCounts.set(c, (greenCounts.get(c) || 0) + 1);
+                                    }
+                                    // Light Blue (Timestamp)
+                                    else if (b > 180 && g > 120 && r < 150) {
+                                        let c = a1lib.mixColor(r, g, b);
+                                        blueCounts.set(c, (blueCounts.get(c) || 0) + 1);
+                                    }
+                                    // White (Brackets / standard text)
+                                    else if (r > 200 && g > 200 && b > 200) {
+                                        let c = a1lib.mixColor(r, g, b);
+                                        whiteCounts.set(c, (whiteCounts.get(c) || 0) + 1);
+                                    }
+                                }
+                                
+                                const addTopColors = (map: Map<number, number>) => {
+                                    let sorted = [...map.entries()].sort((a, b) => b[1] - a[1]);
+                                    for (let i = 0; i < Math.min(5, sorted.length); i++) {
+                                        if (!reader.readargs.colors.includes(sorted[i][0])) {
+                                            reader.readargs.colors.push(sorted[i][0]);
+                                            console.log("Added dynamic color calibration:", a1lib.unmixColor(sorted[i][0]));
+                                        }
+                                    }
+                                };
+                                
+                                addTopColors(greenCounts);
+                                addTopColors(blueCounts);
+                                addTopColors(whiteCounts);
+                                // ---------------------------------
                             }
                         } catch(e) {}
 
