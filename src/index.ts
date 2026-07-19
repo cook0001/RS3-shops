@@ -6,6 +6,25 @@ const ChatBoxReader = ChatBoxModule.default || ChatBoxModule;
 declare var shopData: any;
 declare var taskRates: any;
 
+// PATCH @alt1/chatbox RANGEERROR BUG!
+// The library blindly calls pixelCompare for chat badges near the edges of the bounding box.
+// If the box is tight, simpleCompare throws an uncatchable RangeError which kills the reader.
+if (a1lib.ImageData && a1lib.ImageData.prototype) {
+    const originalPixelCompare = (a1lib.ImageData.prototype as any).pixelCompare;
+    if (originalPixelCompare) {
+        (a1lib.ImageData.prototype as any).pixelCompare = function(img: any, x: number, y: number, max: number) {
+            try {
+                return originalPixelCompare.call(this, img, x, y, max);
+            } catch (e: any) {
+                if (e instanceof RangeError || (e && e.name === "RangeError")) {
+                    return Infinity; // Tell the badge checker "no badge found here" instead of crashing
+                }
+                throw e;
+            }
+        };
+    }
+}
+
 // Elements
 const shopSelect = document.getElementById('shop-select') as HTMLSelectElement;
 const itemSelect = document.getElementById('item-select') as HTMLSelectElement;
@@ -156,7 +175,10 @@ function init() {
             
             let x = Math.min(manualX1, x2);
             let y = Math.min(manualY1, y2);
-            let w = Math.max(Math.abs(x2 - manualX1), 100); // Minimum 100px width
+            
+            // Expand the width by 30 pixels on the right to prevent the Alt1 chat badge checker
+            // from throwing RangeError if a bracket ] or player name touches the right edge.
+            let w = Math.max(Math.abs(x2 - manualX1), 100) + 30; 
             let h = Math.max(Math.abs(y2 - manualY1), 30);  // Minimum 30px height to fit at least 2 lines
             
             // Re-adjust x and y if width/height pushed them out of bounds
