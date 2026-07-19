@@ -56,12 +56,10 @@ declare var Tesseract: any;
 let reader: any = null;
 let ocrInterval: any = null;
 let isOcrRunning = false;let isScanning = false;
-let lastCurrencyDrop = 0;
 let lastCurrencyGainTime = 0;
 let processedLines = new Set<string>();
 let processedTimestamps = new Set<string>();
 let isInitialScan = false;
-let prevLineText = "";
 let previousTesseractLines: string[] = [];
 
 function fuzzyMatch(a: string, b: string): boolean {
@@ -462,12 +460,8 @@ function toggleOCR() {
                     // For detecting duplicates, we use context from the previous line.
                     // This is critical because RS3 often splits game messages (e.g., "[01:00] Contract Complete" followed by "You gain 5 credits").
                     // Without the timestamp from the previous line, every "You gain 5 credits" looks identical and gets ignored.
-                    const uniqueId = prevLineText + "|" + text;
-                    prevLineText = text;
-
-                    if (processedLines.has(uniqueId)) return;
                     
-                    processedLines.add(uniqueId);
+                    processedLines.add(text);
                     
                     if (processedLines.size > 200) {
                         // Clear the set to prevent memory leak, keep the last few
