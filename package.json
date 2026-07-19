@@ -16,8 +16,10 @@
   },
   "dependencies": {
     "@alt1/ocr": "^0.0.17",
+    "canvas": "^3.2.3",
     "cheerio": "^1.2.0",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "tesseract.js": "^7.0.0"
   },
   "devDependencies": {
     "@alt1/base": "^0.0.17",

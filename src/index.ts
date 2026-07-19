@@ -53,9 +53,11 @@ let selectedShop: string | null = null;
 let selectedItem: string | null = null;
 
 // Alt1 OCR State
+declare var Tesseract: any;
 let reader: any = null;
-let ocrInterval: NodeJS.Timeout | null = null;
+let ocrInterval: any = null;
 let isOcrRunning = false;
+let isScanning = false;
 let lastCurrencyDrop = 0;
 let processedLines = new Set<string>();
 
@@ -110,6 +112,10 @@ function init() {
     }
 
     btnOcr.addEventListener('click', toggleOCR);
+
+    // Create a hidden canvas for Tesseract processing
+    const tesseractCanvas = document.createElement('canvas');
+    const tCtx = tesseractCanvas.getContext('2d');
 
     btnManualChatbox.addEventListener('click', () => {
         if (!window.alt1) {
@@ -262,7 +268,9 @@ function toggleOCR() {
         btnOcr.classList.add('active');
         ocrStatus.textContent = "Scanning for chatbox...";
 
-        ocrInterval = setInterval(() => {
+        ocrInterval = setInterval(async () => {
+            if (isScanning) return;
+            isScanning = true;
             try {
                 initReader();
                 
@@ -280,111 +288,56 @@ function toggleOCR() {
 
                 const debugLog = document.getElementById('debug-log');
                 
-                let lines = reader.read() || [];
+                let lines: any[] = [];
+                const img = a1lib.captureHoldFullRs();
                 
-                // --- BRUTE FORCE ALIGNMENT FOR MANUAL SETUP ---
-                // If manual setup was used, line0y might be slightly misaligned.
-                // ChatBoxReader returns null (empty array) if it can't find a font match on line0y.
-                // We can brute force line0y up and down a few pixels to find the perfect alignment.
-                if (lines.length === 0 && reader.pos && reader.pos.mainbox.leftfound === true && !(reader.pos as any).bruteForced) {
-                    (reader.pos as any).bruteForced = true; // Only try this once per manual setup
-                    let originalY = reader.pos.mainbox.line0y;
-                    let found = false;
-                    
-                    const fontsToTry = [
-                        { name: "12pt", def: require("@alt1/chatbox/fonts/12pt.fontmeta.json"), lh: 16 },
-                        { name: "10pt", def: require("@alt1/chatbox/fonts/10pt.fontmeta.json"), lh: 14 },
-                        { name: "14pt", def: require("@alt1/chatbox/fonts/14pt.fontmeta.json"), lh: 18 },
-                        { name: "16pt", def: require("@alt1/chatbox/fonts/16pt.fontmeta.json"), lh: 20 },
-                        { name: "18pt", def: require("@alt1/chatbox/fonts/18pt.fontmeta.json"), lh: 22 }
-                    ];
-                    
-                    const img = a1lib.captureHoldFullRs();
-                    if (img) {
-                        // DRAW THE CAPTURED BOX TO THE CANVAS FOR DEBUGGING!
+                // If manual setup was used, bypass Alt1's strict pixel OCR and use Tesseract AI
+                if (reader.pos && reader.pos.mainbox.leftfound === true && typeof Tesseract !== 'undefined') {
+                    if (img && tCtx) {
                         try {
+                            const rect = reader.pos.mainbox.rect;
+                            tesseractCanvas.width = rect.width;
+                            tesseractCanvas.height = rect.height;
+                            
+                            const idata = img.toData(rect.x, rect.y, rect.width, rect.height);
+                            const idataObj = new ImageData(new Uint8ClampedArray(idata.data.buffer), idata.width, idata.height);
+                            tCtx.putImageData(idataObj, 0, 0);
+                            
+                            // Debug view
                             const dbgCtx = debugCanvas.getContext('2d');
                             if (dbgCtx) {
                                 debugCanvas.style.display = "block";
-                                debugCanvas.width = reader.pos.mainbox.rect.width;
-                                debugCanvas.height = reader.pos.mainbox.rect.height;
-                                const idata = img.toData(reader.pos.mainbox.rect.x, reader.pos.mainbox.rect.y, reader.pos.mainbox.rect.width, reader.pos.mainbox.rect.height);
-                                const idataObj = new ImageData(new Uint8ClampedArray(idata.data.buffer), idata.width, idata.height);
+                                debugCanvas.width = rect.width;
+                                debugCanvas.height = rect.height;
                                 dbgCtx.putImageData(idataObj, 0, 0);
-
-                                // --- ROBUST COLOR PALETTE INJECTION ---
-                                // Inject all standard RS3 chat colors. Alt1 has a tolerance of ~60 for these.
-                                const rsColors = [
-                                    a1lib.mixColor(0, 255, 0),    // Pure Green (Game message)
-                                    a1lib.mixColor(0, 175, 0),    // Dark Green (Filtered/Clan)
-                                    a1lib.mixColor(127, 169, 255),// Light Blue (Timestamps)
-                                    a1lib.mixColor(255, 255, 255),// White (Standard text)
-                                    a1lib.mixColor(0, 255, 255),  // Cyan (Private message)
-                                    a1lib.mixColor(255, 128, 0),  // Orange (Drops)
-                                    a1lib.mixColor(255, 0, 0),    // Red (Boss/Warning)
-                                    a1lib.mixColor(255, 255, 0),  // Yellow (Status)
-                                    a1lib.mixColor(170, 50, 50)   // Dark Red (Important)
-                                ];
-                                
-                                for (const c of rsColors) {
-                                    if (!reader.readargs.colors.includes(c)) {
-                                        reader.readargs.colors.push(c);
-                                    }
-                                }
                             }
-                        } catch(e) {
-                            console.log("Canvas debugging failed", e);
-                        }
 
-                        // BRUTE FORCE LOOP - ALL FONTS, ALL OFFSETS
-                        const maxSearchUp = Math.min(reader.pos.mainbox.rect.height + 20, 300);
-                        
-                        for (const fontData of fontsToTry) {
-                            reader.font = { 
-                                name: fontData.name, 
-                                lineheight: fontData.lh, 
-                                badgey: -10, 
-                                dy: -4, 
-                                def: fontData.def 
-                            };
+                            const { data: { text } } = await Tesseract.recognize(
+                                tesseractCanvas,
+                                'eng',
+                                { logger: (m: any) => {
+                                    if (m.status === 'recognizing text') return;
+                                    ocrStatus.textContent = `Tesseract Loading... ${Math.round(m.progress * 100)}%`;
+                                } }
+                            );
                             
-                            for (let offset = -maxSearchUp; offset <= 20; offset++) {
-                                reader.pos.mainbox.line0y = originalY + offset;
-                                try {
-                                    lines = reader.read(img) || [];
-                                } catch (e: any) {
-                                    continue;
-                                }
-                                if (lines.length > 0 && lines.some(l => {
-                                    const cleanText = l.text.replace(/[^a-zA-Z0-9\s]/g, '').trim();
-                                    return cleanText.length > 4 && /[a-zA-Z]{3}/.test(cleanText);
-                                })) {
-                                    found = true;
-                                    
-                                    // FORCE LOG the exact lines we locked onto so we can see if it's garbage
-                                    if (debugLog) {
-                                        const div = document.createElement('div');
-                                        div.style.color = "#a855f7"; // Purple debug text
-                                        div.textContent = `[LOCKED ${fontData.name}] Found ${lines.length} lines: ` + lines.map(l => l.text).join(' | ');
-                                        debugLog.appendChild(div);
-                                    }
-                                    
-                                    break;
-                                }
+                            if (ocrStatus.textContent && ocrStatus.textContent.includes("Loading")) {
+                                ocrStatus.textContent = "Scanning chatbox for currency drops...";
                             }
-                            if (found) break;
+
+                            if (text) {
+                                const rawLines = text.split('\n').filter((l: string) => l.trim().length > 0);
+                                lines = rawLines.map((l: string) => ({ text: l }));
+                            }
+                        } catch (e) {
+                            console.error("Tesseract failed", e);
                         }
                     }
-                    if (!found) {
-                        // Reset back if we couldn't find it
-                        reader.pos.mainbox.line0y = originalY;
-                        ocrStatus.textContent = "Manual alignment failed. Check box bounds/transparency.";
-                        ocrStatus.style.color = "#fbbf24";
-                    } else {
-                        ocrStatus.textContent = "Manual alignment successful!";
-                        ocrStatus.style.color = "#4ade80";
-                    }
+                } else {
+                    // Standard Alt1 OCR for players without anti-aliased fonts
+                    if (img) lines = reader.read(img) || [];
                 }
+                
                 // ----------------------------------------------
                 
                 let prevLineText = "";
@@ -486,8 +439,10 @@ function toggleOCR() {
                 } else {
                     ocrStatus.textContent = "OCR Error: " + errMsg;
                 }
+            } finally {
+                isScanning = false;
             }
-        }, 600); // Polling interval
+        }, 2000); // Polling interval
     } catch (err: any) {
         ocrStatus.textContent = "Crash: " + err.message;
         console.error(err);
