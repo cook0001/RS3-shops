@@ -55,10 +55,12 @@ let selectedItem: string | null = null;
 declare var Tesseract: any;
 let reader: any = null;
 let ocrInterval: any = null;
-let isOcrRunning = false;
-let isScanning = false;
+let isOcrRunning = false;let isScanning = false;
 let lastCurrencyDrop = 0;
+let lastCurrencyGainTime = 0;
 let processedLines = new Set<string>();
+let processedTimestamps = new Set<string>();
+let isInitialScan = false;
 let prevLineText = "";
 let previousTesseractLines: string[] = [];
 
@@ -76,9 +78,31 @@ function fuzzyMatch(a: string, b: string): boolean {
 function getNewRawLines(oldLines: string[], newLines: string[]): string[] {
     if (oldLines.length === 0) return newLines;
     
-    for (let i = oldLines.length - 1; i >= Math.max(0, oldLines.length - 5); i--) {
+    // Search ALL old lines backwards to find a stable anchor
+    // We skip lines < 4 chars because Tesseract often hallucinates 1-3 char noise
+    // at the bottom of the chatbox due to the blinking text cursor.
+    for (let i = oldLines.length - 1; i >= 0; i--) {
         const oldLine = oldLines[i];
+        if (oldLine.length < 4) continue;
         
+        for (let j = newLines.length - 1; j >= 0; j--) {
+            if (fuzzyMatch(newLines[j], oldLine)) {
+                // If it's a somewhat short line, verify it with the line above it
+                if (oldLine.length < 15 && i > 0 && j > 0) {
+                    // If the verification fails, skip this anchor
+                    if (!fuzzyMatch(oldLines[i-1], newLines[j-1])) continue;
+                }
+                const linesAfterAnchorInOld = oldLines.length - 1 - i;
+                const firstNewIndex = j + 1 + linesAfterAnchorInOld;
+                if (firstNewIndex >= newLines.length) return [];
+                return newLines.slice(firstNewIndex);
+            }
+        }
+    }
+    
+    // Fallback: If no >= 4 char lines matched, try again with any length
+    for (let i = oldLines.length - 1; i >= 0; i--) {
+        const oldLine = oldLines[i];
         for (let j = newLines.length - 1; j >= 0; j--) {
             if (fuzzyMatch(newLines[j], oldLine)) {
                 if (i > 0 && j > 0) {
@@ -91,6 +115,7 @@ function getNewRawLines(oldLines: string[], newLines: string[]): string[] {
             }
         }
     }
+    
     return newLines;
 }
 
@@ -262,6 +287,7 @@ function toggleOCR() {
             // Stop OCR
             if (ocrInterval) clearInterval(ocrInterval);
             isOcrRunning = false;
+            isInitialScan = false;
             btnOcr.textContent = "Start OCR";
             btnOcr.classList.remove('active');
             ocrStatus.textContent = "OCR Stopped. Press Start to resume.";
@@ -297,6 +323,7 @@ function toggleOCR() {
         }
 
         isOcrRunning = true;
+        isInitialScan = true;
         btnOcr.textContent = "Stop OCR";
         btnOcr.classList.add('active');
         ocrStatus.textContent = "Scanning for chatbox...";
@@ -489,17 +516,49 @@ function toggleOCR() {
                     }
                     
                     if (gained > 0) {
+                        // Extract timestamp [HH:MM:SS] if user has in-game timestamps enabled
+                        const timeMatch = text.match(/\[(\d{2}:\d{2}:\d{2})\]/);
+                        let messageTimestamp = timeMatch ? timeMatch[1] : null;
+                        
+                        if (messageTimestamp) {
+                            if (processedTimestamps.has(messageTimestamp)) {
+                                return; // Already granted currency for a drop at this exact second
+                            }
+                            processedTimestamps.add(messageTimestamp);
+                            
+                            // Prevent memory leak
+                            if (processedTimestamps.size > 200) {
+                                const arr = Array.from(processedTimestamps).slice(-50);
+                                processedTimestamps = new Set(arr);
+                            }
+                        } else {
+                            // Fallback for players without timestamps enabled
+                            const now = Date.now();
+                            if (now - lastCurrencyGainTime < 5000) {
+                                console.log("Ignored rapid currency gain due to 5s debounce fallback.");
+                                return;
+                            }
+                            lastCurrencyGainTime = now;
+                        }
+                        
+                        if (isInitialScan) {
+                            console.log("Ignored pre-existing drop found during initial scan.");
+                            return;
+                        }
+                        
                         // Flash input green and add points
                         const current = parseInt(currentCurrencyInput.value, 10) || 0;
                         currentCurrencyInput.value = (current + gained).toString();
                         
-                        currentCurrencyInput.style.backgroundColor = 'rgba(16, 185, 129, 0.2)';
+                        currentCurrencyInput.style.backgroundColor = "#22c55e";
                         setTimeout(() => currentCurrencyInput.style.backgroundColor = '', 500);
                         
                         ocrStatus.textContent = `Detected +${gained} ${selectedShop} currency!`;
                         calculate();
                     }
                 });
+                
+                isInitialScan = false;
             } catch (err: any) {
                 // Usually "capturehold failed" when game is minimized or buffer overloaded
                 const errMsg = typeof err === 'string' ? err : (err.stack || err.message || String(err));
